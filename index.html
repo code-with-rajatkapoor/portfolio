@@ -11,10 +11,25 @@
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/292988060?v=4" />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://code-with-rajatkapoor.github.io/portfolio/" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Rajat Kapoor",
+      "jobTitle": "BCA Student & Aspiring Developer",
+      "alumniOf": "Dr. Virendra Swarup Institute of Computer Studies",
+      "url": "https://code-with-rajatkapoor.github.io/portfolio/",
+      "sameAs": [
+        "https://github.com/code-with-rajatkapoor",
+        "https://www.linkedin.com/in/rajat2557"
+      ]
+    }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
@@ -39,8 +54,33 @@
     };
   </script>
   <style>
-    html { background: #f8fafc; }
-    ::selection { background: #4f46e5; color: #fff; }
+    :root {
+      --bg: #f8fafc;
+      --panel: rgba(255,255,255,0.78);
+      --panel-strong: rgba(255,255,255,0.92);
+      --line: rgba(148, 163, 184, 0.28);
+      --text: #0f172a;
+      --muted: #475569;
+      --brand: #4f46e5;
+      --brand-2: #8b5cf6;
+      --brand-3: #06b6d4;
+    }
+
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(79,70,229,0.12), transparent 32%),
+        radial-gradient(circle at top right, rgba(34,211,238,0.12), transparent 28%),
+        linear-gradient(180deg, #f8fafc 0%, #f8fafc 100%);
+      overflow-x: hidden;
+      color: var(--text);
+    }
+
+    ::selection { background: var(--brand); color: #fff; }
     body::-webkit-scrollbar { width: 10px; }
     body::-webkit-scrollbar-track { background: #f1f5f9; }
     body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
@@ -55,6 +95,7 @@
       color: white;
       padding: 0.75rem 1rem;
       border-radius: 0 0 0.75rem 0.75rem;
+      transition: left 0.2s ease;
     }
     .skip-link:focus { left: 1rem; }
 
@@ -62,26 +103,67 @@
       background-image: radial-gradient(rgba(79,70,229,0.16) 1px, transparent 1px);
       background-size: 22px 22px;
     }
+
     .grad-text {
       background: linear-gradient(100deg, #4f46e5 10%, #8b5cf6 55%, #06b6d4 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      animation: gradientShift 8s ease-in-out infinite alternate;
     }
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
-    .reveal.in { opacity: 1; transform: none; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px) scale(0.985);
+      transition: opacity 0.8s cubic-bezier(.16, 1, .3, 1), transform 0.8s cubic-bezier(.16, 1, .3, 1);
+      will-change: transform, opacity;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
       html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
-    .card-hover { transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .3s; }
-    .card-hover:hover { transform: translateY(-5px); border-color: #c7d2fe; box-shadow: 0 24px 48px -24px rgba(79,70,229,0.35); }
 
-    .ph { border-bottom: 1px dashed #a5b4fc; color: #6366f1; background: rgba(99,102,241,0.05); border-radius: 3px; padding: 0 3px; }
+    .card-hover {
+      transition: transform 0.35s cubic-bezier(.16,1,.3,1), box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      border-color: rgba(199,210,254,0.9);
+      box-shadow: 0 24px 48px -24px rgba(79,70,229,0.35);
+    }
+
+    .ph {
+      border-bottom: 1px dashed #a5b4fc;
+      color: #6366f1;
+      background: rgba(99,102,241,0.05);
+      border-radius: 3px;
+      padding: 0 3px;
+    }
+
     .float { animation: float 6s ease-in-out infinite; }
-    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .float-slow { animation: float 9s ease-in-out infinite; }
+    .float-delay { animation: float 8s ease-in-out infinite 1s; }
+    .spin-slow { animation: spinSlow 18s linear infinite; }
+    .pulse-glow { animation: pulseGlow 2.2s ease-in-out infinite; }
 
-    body { overflow-x: hidden; }
+    .orb {
+      position: absolute;
+      filter: blur(30px);
+      opacity: 0.8;
+      border-radius: 999px;
+      pointer-events: none;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 20rem; height: 20rem; left: -6rem; top: -5rem; background: rgba(99,102,241,0.22); }
+    .orb-2 { width: 18rem; height: 18rem; right: 0; top: 4rem; background: rgba(34,211,238,0.18); animation-delay: 1s; }
+    .orb-3 { width: 17rem; height: 17rem; left: 35%; bottom: -8rem; background: rgba(168,85,247,0.17); animation-delay: 2s; }
+
     .hero-photo-wrap {
       position: relative;
       width: min(100%, 360px);
@@ -89,16 +171,19 @@
       margin-inline: auto;
       display: grid;
       place-items: center;
+      transform: rotate(-2deg);
+      animation: tiltFloat 9s ease-in-out infinite;
     }
     .hero-photo-wrap::before {
       content: "";
       position: absolute;
       inset: -12px;
       border-radius: 9999px;
-      background: linear-gradient(135deg, rgba(99,102,241,.28), rgba(6,182,212,.20), rgba(139,92,246,.18));
+      background: linear-gradient(135deg, rgba(99,102,241,.28), rgba(6,182,212,.22), rgba(139,92,246,.18));
       filter: blur(1px);
       transform: rotate(3deg);
       z-index: -1;
+      animation: spinSlow 20s linear infinite;
     }
     .profile-photo {
       display: block;
@@ -122,8 +207,15 @@
       background: rgba(255,255,255,.92);
       backdrop-filter: blur(14px);
       box-shadow: 0 18px 40px -18px rgba(15,23,42,.35);
+      animation: bounceSoft 4s ease-in-out infinite;
     }
-    .shine-card { position: relative; overflow: hidden; }
+
+    .shine-card {
+      position: relative;
+      overflow: hidden;
+      transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
     .shine-card::after {
       content: "";
       position: absolute;
@@ -137,6 +229,10 @@
       pointer-events: none;
     }
     .shine-card:hover::after { left: 125%; }
+    .shine-card:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+
     .gradient-border {
       position: relative;
       isolation: isolate;
@@ -153,9 +249,10 @@
       mask-composite: exclude;
       pointer-events: none;
       z-index: -1;
+      animation: borderGlow 4s linear infinite;
     }
-    .nav-glow { box-shadow: 0 10px 35px -18px rgba(79,70,229,.55); }
 
+    .nav-glow { box-shadow: 0 10px 35px -18px rgba(79,70,229,.55); }
     .site-mini-photo, .footer-photo {
       width: 40px;
       height: 40px;
@@ -174,7 +271,67 @@
       transform: translateY(10px);
       transition: .25s ease;
     }
-    .back-top.show { opacity: 1; pointer-events: auto; transform: none; }
+    .back-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+    }
+
+    .section-tag {
+      letter-spacing: 0.25em;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(248,250,252,0.96));
+    }
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(99,102,241,0.14), transparent 32%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .project-card:hover::before { opacity: 1; }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes drift {
+      0% { transform: translate3d(-8px, 0, 0) scale(1); }
+      50% { transform: translate3d(18px, 16px, 0) scale(1.06); }
+      100% { transform: translate3d(-10px, -8px, 0) scale(0.96); }
+    }
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulseGlow {
+      0%,100% { box-shadow: 0 0 0 0 rgba(79,70,229,0.25); }
+      50% { box-shadow: 0 0 0 10px rgba(79,70,229,0); }
+    }
+    @keyframes borderGlow {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+    @keyframes gradientShift {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(35deg); }
+    }
+    @keyframes tiltFloat {
+      0%,100% { transform: rotate(-2deg) translateY(0px); }
+      50% { transform: rotate(2deg) translateY(-10px); }
+    }
+    @keyframes bounceSoft {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
     @media (max-width: 640px) {
       .hero-photo-wrap { width: min(78vw, 300px); }
       .photo-badge { right: -5px; }
@@ -185,13 +342,14 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header id="nav" class="fixed inset-x-0 top-0 z-50">
-    <nav class="mx-auto max-w-6xl px-5">
+    <nav class="mx-auto max-w-6xl px-5" aria-label="Main navigation">
       <div id="navInner" class="mt-3 flex h-16 items-center justify-between rounded-2xl px-4 transition-all duration-300 nav-glow">
-        <a href="#top" class="flex items-center gap-2.5">
+        <a href="#top" class="flex items-center gap-2.5" aria-label="Go to top section">
           <img src="https://avatars.githubusercontent.com/u/292988060?v=4" alt="Rajat Kapoor avatar" class="site-mini-photo" />
           <span class="font-display text-sm font-bold tracking-tight text-slate-900">Rajat Kapoor</span>
           <span class="hidden rounded-full bg-brand-50 px-2.5 py-0.5 text-[11px] font-semibold text-brand-600 ring-1 ring-inset ring-brand-200 sm:inline">BCA</span>
         </a>
+
         <div class="hidden items-center gap-1 text-sm md:flex">
           <a href="#about" class="rounded-lg px-3 py-2 text-slate-600 hover:bg-white hover:text-brand-700 hover:shadow-soft transition">About</a>
           <a href="#skills" class="rounded-lg px-3 py-2 text-slate-600 hover:bg-white hover:text-brand-700 hover:shadow-soft transition">Skills</a>
@@ -199,16 +357,27 @@
           <a href="#projects" class="rounded-lg px-3 py-2 text-slate-600 hover:bg-white hover:text-brand-700 hover:shadow-soft transition">Projects</a>
           <a href="#contact" class="ml-2 rounded-xl bg-slate-900 px-4 py-2 font-medium text-white hover:bg-brand-700 transition">Contact</a>
         </div>
-        <button id="menuBtn" aria-label="Toggle menu" class="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-600 md:hidden">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+
+        <button
+          id="menuBtn"
+          aria-label="Toggle menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+          class="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-600 md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
+          type="button"
+        >
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
         </button>
       </div>
-      <div id="mobileMenu" class="hidden mt-2 rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-lift backdrop-blur md:hidden">
-        <a href="#about" class="block rounded-xl px-4 py-3 text-slate-700 hover:bg-brand-50 hover:text-brand-700">About</a>
-        <a href="#skills" class="block rounded-xl px-4 py-3 text-slate-700 hover:bg-brand-50 hover:text-brand-700">Skills</a>
-        <a href="#education" class="block rounded-xl px-4 py-3 text-slate-700 hover:bg-brand-50 hover:text-brand-700">Education</a>
-        <a href="#projects" class="block rounded-xl px-4 py-3 text-slate-700 hover:bg-brand-50 hover:text-brand-700">Projects</a>
-        <a href="#contact" class="block rounded-xl px-4 py-3 font-medium text-brand-700 hover:bg-brand-50">Contact</a>
+
+      <div id="mobileMenu" class="hidden mt-2 rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-lift backdrop-blur md:hidden" role="menu">
+        <a href="#about" class="block rounded-xl px-4 py-3 text-slate-700 hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500" role="menuitem">About</a>
+        <a href="#skills" class="block rounded-xl px-4 py-3 text-slate-700 hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500" role="menuitem">Skills</a>
+        <a href="#education" class="block rounded-xl px-4 py-3 text-slate-700 hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500" role="menuitem">Education</a>
+        <a href="#projects" class="block rounded-xl px-4 py-3 text-slate-700 hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500" role="menuitem">Projects</a>
+        <a href="#contact" class="block rounded-xl px-4 py-3 font-medium text-brand-700 hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500" role="menuitem">Contact</a>
       </div>
     </nav>
   </header>
@@ -216,13 +385,13 @@
   <main id="main-content">
     <section id="top" class="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
       <div class="absolute inset-0 dots opacity-60"></div>
-      <div class="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-brand-300/30 blur-3xl"></div>
-      <div class="absolute -top-10 right-0 h-72 w-72 rounded-full bg-cyan-200/40 blur-3xl"></div>
-      <div class="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-fuchsia-200/30 blur-3xl"></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
 
       <div class="relative mx-auto grid max-w-6xl gap-14 px-5 lg:grid-cols-12 lg:items-center">
         <div class="lg:col-span-7">
-          <div class="reveal inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/80 px-3.5 py-1.5 text-xs font-semibold text-brand-700 shadow-soft backdrop-blur">
+          <div class="reveal inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/80 px-3.5 py-1.5 text-xs font-semibold text-brand-700 shadow-soft backdrop-blur pulse-glow">
             <span class="relative flex h-1.5 w-1.5">
               <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
               <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
@@ -244,14 +413,14 @@
           <div class="reveal mt-9 flex flex-wrap items-center gap-3">
             <a href="#projects" class="group inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-700 shadow-soft transition">
               View my projects
-              <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+              <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
-            <a href="https://github.com/code-with-rajatkapoor" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:border-brand-200 hover:text-brand-700 transition">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-.97-.66.08-.65.08-.65 1.07.08 1.63 1.1 1.63 1.1.95 1.62 2.5 1.15 3.11.88.1-.68.37-1.14.67-1.4-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.14 1.18a10.9 10.9 0 0 1 5.72 0c2.17-1.49 3.13-1.18 3.13-1.18.63 1.58.23 2.75.11 3.04.73.81 1.17 1.84 1.17 3.1 0 4.44-2.7 5.4-5.28 5.69.38.33.72.99.72 2v2.95c0 .31.21.66.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+            <a href="https://github.com/code-with-rajatkapoor" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-soft transition hover:border-brand-200 hover:text-brand-700">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.36-1.7-1.36-1.7-1.11-.76.08-.75.08-.75 1.23.09 1.88 1.28 1.88 1.28 1.09 1.87 2.86 1.33 3.55.99.11-.78.43-1.32.78-1.63-2.56-.3-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.18-3.09-.12-.3-.51-1.52.11-3.16 0 0 .97-.31 3.17 1.18a11.02 11.02 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.64.23 2.86.11 3.16.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.38-5.26 5.67.44.39.82 1.15.82 2.33v3.45c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
               GitHub
             </a>
-            <a href="https://www.linkedin.com/in/rajat2557" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:border-brand-200 hover:text-brand-700 transition">
-              <svg class="h-4 w-4 text-[#0a66c2]" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.38-1.86c3.62 0 4.28 2.38 4.28 5.47v6.28ZM6.54 7.26a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM4.89 9h3.3v11.45h-3.3V9Z"/></svg>
+            <a href="https://www.linkedin.com/in/rajat2557" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-soft transition hover:border-brand-200 hover:text-brand-700">
+              <svg class="h-4 w-4 text-[#0a66c2]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.55 7.44a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.55 20.45V9h-4.2v11.45h4.2Z"/></svg>
               LinkedIn
             </a>
             <a href="mailto:kapoorrajat125@gmail.com" class="inline-flex items-center gap-2 rounded-xl px-4 py-3 font-mono text-sm text-slate-500 hover:text-brand-700 transition">
@@ -330,18 +499,18 @@
       <div class="mx-auto max-w-6xl px-5">
         <div class="grid gap-12 lg:grid-cols-12">
           <div class="reveal lg:col-span-4">
-            <p class="font-mono text-xs uppercase tracking-[0.25em] text-brand-600">01 — About</p>
+            <p class="section-tag font-mono text-brand-600">01 — About</p>
             <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Curious student,<br />hands-on builder.</h2>
           </div>
           <div class="reveal space-y-5 text-[1.0625rem] leading-relaxed text-slate-600 lg:col-span-8">
             <p>
-              I'm Rajat, a first-year <strong class="font-semibold text-slate-900">BCA</strong> student at Dr. Virendra Swarup Institute of Computer Studies, Kanpur. My journey started with C in the classroom and gradually expanded into web development, product thinking, and practical problem solving.
+              I'm Rajat, a first-year <strong class="font-semibold text-slate-900">BCA</strong> student at Dr. Virendra Swarup Institute of Computer Studies, Kanpur. My journey started with C in the classroom and quickly expanded into web projects, logic building, and real-world problem solving.
             </p>
             <p>
-              I started with the smallest possible steps — a hello world, then a calculator, then a program that checks whether someone is old enough to vote. From there I moved into full-stack work, small team projects, and application thinking that is closer to real software products.
+              I started with the smallest possible steps — a hello world, then a calculator, then a program that checks whether someone is old enough to vote. From there I moved into full-stack work, building apps and interfaces that teach me both design and engineering.
             </p>
             <p>
-              I'm still early, and I'm okay with that. I'd rather build something small, break it, fix it and learn — than wait until I know everything. If you're building something and want an extra pair of hands, I'd love to be part of it.
+              I'm still early, and I'm okay with that. I'd rather build something small, break it, fix it and learn — than wait until I know everything. If you're building something and want an extra pair of hands, I'm always open to collaborating.
             </p>
             <div class="flex flex-wrap gap-2 pt-1">
               <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 ring-1 ring-inset ring-brand-200">Problem solving</span>
@@ -357,7 +526,7 @@
     <section id="skills" class="relative border-y border-slate-200 bg-white py-20 md:py-28">
       <div class="mx-auto max-w-6xl px-5">
         <div class="reveal max-w-2xl">
-          <p class="font-mono text-xs uppercase tracking-[0.25em] text-brand-600">02 — Skills</p>
+          <p class="section-tag font-mono text-brand-600">02 — Skills</p>
           <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">What I'm working with</h2>
           <p class="mt-4 text-slate-600">Honest levels: what I've actually written code with, and what I'm actively learning right now.</p>
         </div>
@@ -366,7 +535,7 @@
           <div class="reveal card-hover rounded-3xl border border-slate-200 bg-slate-50/60 p-7">
             <div class="flex items-center gap-3">
               <span class="grid h-10 w-10 place-items-center rounded-xl bg-emerald-100 text-emerald-600 ring-1 ring-inset ring-emerald-200">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
               </span>
               <div>
                 <h3 class="font-display text-base font-bold text-slate-900">Comfortable with</h3>
@@ -386,7 +555,7 @@
           <div class="reveal card-hover rounded-3xl border border-brand-200 bg-brand-50/50 p-7">
             <div class="flex items-center gap-3">
               <span class="grid h-10 w-10 place-items-center rounded-xl bg-brand-100 text-brand-600 ring-1 ring-inset ring-brand-200">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M2 12h4M18 12h4M4.9 19.1l2.9-2.9M16.2 7.8l2.9-2.9"/></svg>
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M2 12h4M18 12h4M4.9 19.1l2.9-2.9M16.2 7.8l2.9-2.9"/></svg>
               </span>
               <div>
                 <h3 class="font-display text-base font-bold text-slate-900">Currently learning</h3>
@@ -408,10 +577,10 @@
         <div class="reveal mt-6 rounded-3xl border border-slate-200 bg-slate-50/60 p-7">
           <h3 class="font-display text-base font-bold text-slate-900">Tools I use</h3>
           <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <div class="flex items-center gap-2.5 rounded-xl bg-white px-3.5 py-3 shadow-soft ring-1 ring-inset ring-slate-200"><span class="h-2 w-2 rounded-full bg-sky-500"></span><span class="text-sm font-medium text-slate-700">VS Code</span></div>
-            <div class="flex items-center gap-2.5 rounded-xl bg-white px-3.5 py-3 shadow-soft ring-1 ring-inset ring-slate-200"><span class="h-2 w-2 rounded-full bg-slate-800"></span><span class="text-sm font-medium text-slate-700">GitHub</span></div>
-            <div class="flex items-center gap-2.5 rounded-xl bg-white px-3.5 py-3 shadow-soft ring-1 ring-inset ring-slate-200"><span class="h-2 w-2 rounded-full bg-emerald-500"></span><span class="text-sm font-medium text-slate-700">Node.js</span></div>
-            <div class="flex items-center gap-2.5 rounded-xl bg-white px-3.5 py-3 shadow-soft ring-1 ring-inset ring-slate-200"><span class="h-2 w-2 rounded-full bg-amber-500"></span><span class="text-sm font-medium text-slate-700">Postman</span></div>
+            <div class="flex items-center gap-2.5 rounded-xl bg-white px-3.5 py-3 shadow-soft ring-1 ring-inset ring-slate-200"><span class="h-2 w-2 rounded-full bg-sky-500"></span><span class="text-sm text-slate-700">GitHub</span></div>
+            <div class="flex items-center gap-2.5 rounded-xl bg-white px-3.5 py-3 shadow-soft ring-1 ring-inset ring-slate-200"><span class="h-2 w-2 rounded-full bg-slate-800"></span><span class="text-sm text-slate-700">VS Code</span></div>
+            <div class="flex items-center gap-2.5 rounded-xl bg-white px-3.5 py-3 shadow-soft ring-1 ring-inset ring-slate-200"><span class="h-2 w-2 rounded-full bg-emerald-500"></span><span class="text-sm text-slate-700">SQLite</span></div>
+            <div class="flex items-center gap-2.5 rounded-xl bg-white px-3.5 py-3 shadow-soft ring-1 ring-inset ring-slate-200"><span class="h-2 w-2 rounded-full bg-amber-500"></span><span class="text-sm text-slate-700">Terminal</span></div>
           </div>
         </div>
       </div>
@@ -420,7 +589,7 @@
     <section id="education" class="relative py-20 md:py-28">
       <div class="mx-auto max-w-6xl px-5">
         <div class="reveal max-w-2xl">
-          <p class="font-mono text-xs uppercase tracking-[0.25em] text-brand-600">03 — Education</p>
+          <p class="section-tag font-mono text-brand-600">03 — Education</p>
           <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Where I'm studying</h2>
         </div>
 
@@ -439,9 +608,9 @@
                 </p>
                 <p class="mt-1 text-xs text-slate-500">AICTE approved · Affiliated to Chhatrapati Shahu Ji Maharaj University (CSJMU), Kanpur</p>
                 <ul class="mt-4 space-y-2 text-sm leading-relaxed text-slate-600">
-                  <li class="flex gap-2.5"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-500"></span><span>A three-year undergraduate programme covering programming, data structures, DBMS, operating systems, and software fundamentals.</span></li>
-                  <li class="flex gap-2.5"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-500"></span><span>Building small projects alongside coursework to apply what I study — from C programs to full-stack web apps.</span></li>
-                  <li class="flex gap-2.5"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-500"></span><span>Interested in internships where I can learn from a real team and contribute to real-world work.</span></li>
+                  <li class="flex gap-2.5"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-500"></span><span>A three-year undergraduate programme covering programming, data structures, DBMS, networking and software fundamentals.</span></li>
+                  <li class="flex gap-2.5"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-500"></span><span>Building small projects alongside coursework to apply what I study — from C programs to full-stack apps.</span></li>
+                  <li class="flex gap-2.5"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-500"></span><span>Interested in internships where I can learn from a real team and contribute to practical work.</span></li>
                 </ul>
               </div>
               <p class="shrink-0 font-mono text-xs text-slate-500 sm:text-right">2026 — 2029<br />1st Year</p>
@@ -478,76 +647,42 @@
       <div class="mx-auto max-w-6xl px-5">
         <div class="reveal flex flex-wrap items-end justify-between gap-6">
           <div class="max-w-2xl">
-            <p class="font-mono text-xs uppercase tracking-[0.25em] text-brand-600">04 — Projects</p>
+            <p class="section-tag font-mono text-brand-600">04 — Projects</p>
             <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Things I've built</h2>
-            <p class="mt-4 text-slate-600">A few of the most meaningful builds from my recent work.</p>
+            <p class="mt-4 text-slate-600">From a small C program to a full-stack team project — every repo is public, including the small ones.</p>
           </div>
           <a href="https://github.com/code-with-rajatkapoor" target="_blank" rel="noopener" class="text-sm font-medium text-brand-600 hover:text-brand-700">All code on GitHub →</a>
         </div>
 
-        <div class="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <article class="reveal card-hover group flex flex-col rounded-3xl border border-brand-200 bg-gradient-to-br from-brand-50/80 to-white p-7">
-            <div class="flex items-start justify-between">
-              <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-600 text-white shadow-lift">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V10l8-6 8 6v11"/><path d="M9 21v-6h6v6"/></svg>
-              </span>
-              <span class="rounded-full bg-white px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400 ring-1 ring-inset ring-slate-200">Featured</span>
-            </div>
-            <h3 class="mt-5 font-display text-lg font-bold text-slate-900">Campus Dash TV</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
-              An AI-powered student dashboard designed for a Fire OS-like smart TV experience with voice assistance, focus tools, and a futuristic campus interface.
-            </p>
-            <div class="mt-5 flex flex-wrap gap-1.5">
-              <span class="rounded-md bg-white px-2.5 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">TypeScript</span>
-              <span class="rounded-md bg-white px-2.5 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">Node.js</span>
-              <span class="rounded-md bg-white px-2.5 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">Voice UI</span>
-            </div>
-            <div class="mt-5 flex gap-4 border-t border-slate-200 pt-4 text-xs font-medium">
-              <a href="https://github.com/code-with-rajatkapoor/campus-dash-tv" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Code →</a>
-              <a href="https://campus-dash-tv.onrender.com/" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Live →</a>
-            </div>
-          </article>
-
-          <article class="reveal card-hover group flex flex-col rounded-3xl border border-slate-200 bg-slate-50/60 p-7">
-            <div class="flex items-start justify-between">
-              <span class="grid h-11 w-11 place-items-center rounded-xl bg-violet-100 text-violet-600 ring-1 ring-inset ring-violet-200">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h8M8 14h5"/></svg>
-              </span>
-              <span class="rounded-full bg-white px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400 ring-1 ring-inset ring-slate-200">Full-stack</span>
-            </div>
-            <h3 class="mt-5 font-display text-lg font-bold text-slate-900">Municipal Corporation</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
-              A civic portal with role-based access, complaint tracking, and a persistent backend for citizens and officers. Built as a team project with real app flows.
-            </p>
-            <div class="mt-5 flex flex-wrap gap-1.5">
-              <span class="rounded-md bg-white px-2 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">Express</span>
-              <span class="rounded-md bg-white px-2 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">SQLite</span>
-              <span class="rounded-md bg-white px-2 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">JS</span>
-            </div>
-            <div class="mt-5 flex gap-4 border-t border-slate-200 pt-4 text-xs font-medium">
-              <a href="https://github.com/code-with-rajatkapoor/municipal-corporation" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Code →</a>
-              <a href="https://code-with-rajatkapoor.github.io/municipal-corporation/" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Demo →</a>
-            </div>
-          </article>
-
-          <article class="reveal card-hover group flex flex-col rounded-3xl border border-slate-200 bg-slate-50/60 p-7">
-            <div class="flex items-start justify-between">
-              <span class="grid h-11 w-11 place-items-center rounded-xl bg-rose-100 text-rose-600 ring-1 ring-inset ring-rose-200">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v6c0 4.4 3 8.5 8 10 5-1.5 8-5.6 8-10V7l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
-              </span>
-              <span class="rounded-full bg-white px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400 ring-1 ring-inset ring-slate-200">AI</span>
-            </div>
-            <h3 class="mt-5 font-display text-lg font-bold text-slate-900">ScamGuard</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
-              An AI phishing and scam detection tool that helps identify suspicious messages, links, and threat patterns before users take action.
-            </p>
-            <div class="mt-5 flex flex-wrap gap-1.5">
-              <span class="rounded-md bg-white px-2 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">TypeScript</span>
-              <span class="rounded-md bg-white px-2 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">AI detection</span>
-            </div>
-            <div class="mt-5 flex gap-4 border-t border-slate-200 pt-4 text-xs font-medium">
-              <a href="https://github.com/code-with-rajatkapoor/scamguard" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Code →</a>
-              <a href="https://scamguard-omega.vercel.app" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Live →</a>
+        <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <article class="reveal project-card card-hover group flex flex-col rounded-3xl border border-brand-200 bg-gradient-to-br from-brand-50/80 to-white p-7 lg:col-span-3">
+            <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+              <div class="max-w-3xl">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-600 text-white shadow-lift">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M4 21V10l8-6 8 6v11"/><path d="M9 21v-6h6v6"/></svg>
+                  </span>
+                  <span class="rounded-full bg-brand-600 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">Featured</span>
+                  <span class="rounded-full bg-white px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 ring-1 ring-inset ring-slate-200">Team project</span>
+                </div>
+                <h3 class="mt-5 font-display text-xl font-bold text-slate-900">Municipal Corporation Portal</h3>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600">
+                  A full-stack municipal corporation portal with role-based access for citizens and officers, real-time complaint registration, and a persistent backend. Built with Team Code Debuggers to practice full-stack workflows, auth logic, and practical app architecture.
+                </p>
+                <div class="mt-5 flex flex-wrap gap-1.5">
+                  <span class="rounded-md bg-white px-2.5 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">Express.js</span>
+                  <span class="rounded-md bg-white px-2.5 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">SQLite</span>
+                  <span class="rounded-md bg-white px-2.5 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">JavaScript</span>
+                  <span class="rounded-md bg-white px-2.5 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">Role-based auth</span>
+                </div>
+              </div>
+              <div class="shrink-0 lg:pt-2">
+                <a href="https://github.com/code-with-rajatkapoor/municipal-corporation" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-700 transition">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.36-1.7-1.36-1.7-1.11-.76.08-.75.08-.75 1.23.09 1.88 1.28 1.88 1.28 1.09 1.87 2.86 1.33 3.55.99.11-.78.43-1.32.78-1.63-2.56-.3-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.18-3.09-.12-.3-.51-1.52.11-3.16 0 0 .97-.31 3.17 1.18a11.02 11.02 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.64.23 2.86.11 3.16.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.38-5.26 5.67.44.39.82 1.15.82 2.33v3.45c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+                  View repository
+                </a>
+                <p class="mt-3 text-center text-xs text-slate-500">Built with Team Code Debuggers</p>
+              </div>
             </div>
           </article>
         </div>
@@ -558,7 +693,7 @@
       <div class="mx-auto max-w-6xl px-5">
         <div class="grid gap-12 lg:grid-cols-12">
           <div class="reveal lg:col-span-4">
-            <p class="font-mono text-xs uppercase tracking-[0.25em] text-brand-600">05 — Right now</p>
+            <p class="section-tag font-mono text-brand-600">05 — Right now</p>
             <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Current focus</h2>
             <p class="mt-4 text-slate-600">What I'm actually spending my week on, so this section stays honest as I grow.</p>
           </div>
@@ -594,17 +729,17 @@
       <div class="relative mx-auto max-w-6xl px-5">
         <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
           <div class="reveal lg:col-span-6">
-            <p class="font-mono text-xs uppercase tracking-[0.25em] text-brand-600">06 — Contact</p>
+            <p class="section-tag font-mono text-brand-600">06 — Contact</p>
             <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">Let's talk.</h2>
             <p class="mt-5 max-w-lg text-lg text-slate-600">
               I'm open to internships, junior developer roles, student collaborations and college projects. If you want to build something — or just say hi — my inbox is open.
             </p>
             <a href="mailto:kapoorrajat125@gmail.com" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white shadow-soft hover:bg-brand-700 transition">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m5 7 7 6 7-6"/></svg>
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
               kapoorrajat125@gmail.com
             </a>
             <p class="mt-4 flex items-center gap-2 text-sm text-slate-500">
-              <svg class="h-4 w-4 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6 0-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <svg class="h-4 w-4 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
               Kanpur, Uttar Pradesh, India
             </p>
           </div>
@@ -614,46 +749,46 @@
               <div class="divide-y divide-slate-200">
                 <a href="https://github.com/code-with-rajatkapoor" target="_blank" rel="noopener" class="group flex items-center gap-4 rounded-2xl px-4 py-4 hover:bg-white transition">
                   <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-slate-700 shadow-soft ring-1 ring-inset ring-slate-200">
-                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-.97-.66.08-.65.08-.65 1.07.08 1.63 1.1 1.63 1.1.95 1.62 2.5 1.15 3.11.88.1-.68.37-1.14.67-1.4-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.14 1.18a10.9 10.9 0 0 1 5.72 0c2.17-1.49 3.13-1.18 3.13-1.18.63 1.58.23 2.75.11 3.04.73.81 1.17 1.84 1.17 3.1 0 4.44-2.7 5.4-5.28 5.69.38.33.72.99.72 2v2.95c0 .31.21.66.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.36-1.7-1.36-1.7-1.11-.76.08-.75.08-.75 1.23.09 1.88 1.28 1.88 1.28 1.09 1.87 2.86 1.33 3.55.99.11-.78.43-1.32.78-1.63-2.56-.3-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.18-3.09-.12-.3-.51-1.52.11-3.16 0 0 .97-.31 3.17 1.18a11.02 11.02 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.64.23 2.86.11 3.16.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.38-5.26 5.67.44.39.82 1.15.82 2.33v3.45c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
                   </span>
                   <span class="min-w-0 flex-1">
                     <span class="block text-sm font-semibold text-slate-900">GitHub</span>
                     <span class="block truncate font-mono text-xs text-brand-600">github.com/code-with-rajatkapoor</span>
                   </span>
-                  <svg class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-brand-600 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                  <svg class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-brand-600 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
                 </a>
 
                 <a href="mailto:kapoorrajat125@gmail.com" class="group flex items-center gap-4 rounded-2xl px-4 py-4 hover:bg-white transition">
                   <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-brand-600 shadow-soft ring-1 ring-inset ring-slate-200">
-                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m5 7 7 6 7-6"/></svg>
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
                   </span>
                   <span class="min-w-0 flex-1">
                     <span class="block text-sm font-semibold text-slate-900">Email</span>
                     <span class="block truncate font-mono text-xs text-brand-600">kapoorrajat125@gmail.com</span>
                   </span>
-                  <svg class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-brand-600 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                  <svg class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-brand-600 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
                 </a>
 
                 <a href="https://www.linkedin.com/in/rajat2557" target="_blank" rel="noopener" class="group flex items-center gap-4 rounded-2xl px-4 py-4 hover:bg-white transition">
                   <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-[#0a66c2] shadow-soft ring-1 ring-inset ring-slate-200">
-                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.38-1.86c3.62 0 4.28 2.38 4.28 5.47v6.28ZM6.54 7.26a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM4.89 9h3.3v11.45h-3.3V9Z"/></svg>
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.55 7.44a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.55 20.45V9h-4.2v11.45h4.2Z"/></svg>
                   </span>
                   <span class="min-w-0 flex-1">
                     <span class="block text-sm font-semibold text-slate-900">LinkedIn</span>
                     <span class="block truncate font-mono text-xs text-brand-600">linkedin.com/in/rajat2557</span>
                   </span>
-                  <svg class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-brand-600 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                  <svg class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-brand-600 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
                 </a>
 
                 <a href="http://www.vsicsindia.com/bca.php" target="_blank" rel="noopener" class="group flex items-center gap-4 rounded-2xl px-4 py-4 hover:bg-white transition">
                   <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-violet-600 shadow-soft ring-1 ring-inset ring-slate-200">
-                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5l6 3 6-3v-5"/></svg>
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M12 15v4"/><path d="m7 12 5 3 5-3"/></svg>
                   </span>
                   <span class="min-w-0 flex-1">
                     <span class="block text-sm font-semibold text-slate-900">My Institute</span>
                     <span class="block truncate font-mono text-xs text-brand-600">Dr. Virendra Swarup Institute of Computer Studies, Kanpur</span>
                   </span>
-                  <svg class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-brand-600 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                  <svg class="h-4 w-4 shrink-0 text-slate-400 group-hover:text-brand-600 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
                 </a>
               </div>
             </div>
@@ -664,7 +799,7 @@
   </main>
 
   <button id="backTop" aria-label="Back to top" class="back-top fixed bottom-6 right-6 z-40 grid h-11 w-11 place-items-center rounded-full bg-slate-900 text-white shadow-lift hover:bg-brand-700" type="button">
-    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
   </button>
 
   <footer class="border-t border-slate-200 bg-slate-50 py-10">
@@ -685,27 +820,53 @@
 
     const navInner = document.getElementById('navInner');
     const onScroll = () => {
-      if (window.scrollY > 12) navInner.classList.add('bg-white/85', 'backdrop-blur-xl', 'border', 'border-slate-200', 'shadow-soft');
-      else navInner.classList.remove('bg-white/85', 'backdrop-blur-xl', 'border', 'border-slate-200', 'shadow-soft');
+      if (window.scrollY > 12) {
+        navInner.classList.add('bg-white/85', 'backdrop-blur-xl', 'border', 'border-slate-200', 'shadow-soft');
+      } else {
+        navInner.classList.remove('bg-white/85', 'backdrop-blur-xl', 'border', 'border-slate-200', 'shadow-soft');
+      }
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
 
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+    const setMenuState = (isOpen) => {
+      mobileMenu.classList.toggle('hidden', !isOpen);
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+    };
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
+      setMenuState(!isOpen);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => setMenuState(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setMenuState(false);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target) && menuBtn.getAttribute('aria-expanded') === 'true') {
+        setMenuState(false);
+      }
+    });
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
+      entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          entry.target.style.transitionDelay = Math.min(i * 60, 220) + 'ms';
+          entry.target.style.transitionDelay = Math.min(index * 60, 220) + 'ms';
           entry.target.classList.add('in');
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
     const backTop = document.getElementById('backTop');
     const updateBackTop = () => {
