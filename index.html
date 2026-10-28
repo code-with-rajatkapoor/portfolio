@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rajat Kapoor | BCA Student &amp; Aspiring Developer</title>
   <meta name="theme-color" content="#4f46e5" />
+  <meta name="color-scheme" content="light" />
   <meta name="description" content="Rajat Kapoor — BCA student and aspiring developer from Kanpur. Explore my projects, skills, education and contact details." />
   <meta property="og:title" content="Rajat Kapoor | Portfolio" />
   <meta property="og:description" content="BCA student building projects in C, JavaScript, Node.js and full-stack web development." />
@@ -110,6 +111,18 @@
       background-clip: text;
       color: transparent;
       animation: gradientShift 8s ease-in-out infinite alternate;
+    }
+
+    .typed {
+      display: inline;
+    }
+    .cursor {
+      display: inline-block;
+      width: 0.6em;
+      height: 1.15em;
+      background: currentColor;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
     }
 
     .reveal {
@@ -221,9 +234,7 @@
       pointer-events: none;
     }
     .shine-card:hover::after { left: 125%; }
-    .shine-card:hover {
-      transform: translateY(-4px) scale(1.01);
-    }
+    .shine-card:hover { transform: translateY(-4px) scale(1.01); }
 
     .gradient-border {
       position: relative;
@@ -323,11 +334,108 @@
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
     }
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes counterUp {
+      from { opacity: 0.4; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes pulseGlowContainer {
+      0%,100% { box-shadow: 0 0 0 0 rgba(79,70,229,0.2); }
+      50% { box-shadow: 0 0 0 14px rgba(79,70,229,0); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -400% 0; }
+      100% { background-position: 400% 0; }
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      z-index: 999;
+      background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
+      border-radius: 0 2px 2px 0;
+      opacity: 0.9;
+      transition: width 0.08s linear;
+    }
+    .scroll-progress.dark-mode { background: linear-gradient(90deg, #818cf8, #a78bfa, #22d3ee); }
+
+    .theme-icon { transition: opacity 0.2s ease; }
+
+    .skill-track {
+      height: 8px;
+      border-radius: 999px;
+      background: var(--line);
+      overflow: hidden;
+      position: relative;
+    }
+    .skill-track .fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #6366f1, #06b6d4);
+      transform-origin: left;
+      animation: shimmer 6s ease-in-out infinite alternate;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .skill-track .fill { animation: none; }
+    }
+
+    .marquee {
+      display: flex;
+      width: max-content;
+      animation: marquee 36s linear infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee { animation: none; }
+    }
 
     @media (max-width: 640px) {
       .hero-photo-wrap { width: min(78vw, 300px); }
       .photo-badge { right: -5px; }
     }
+  </style>
+  <style>
+    /* Dark mode tokens */
+    .dark {
+      color-scheme: dark;
+      --bg: #020617;
+      --panel: rgba(15,23,42,0.82);
+      --panel-strong: rgba(15,23,42,0.9);
+      --line: rgba(148,163,184,0.18);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --brand: #818cf8;
+      --brand-2: #a78bfa;
+      --brand-3: #22d3ee;
+    }
+    .dark body {
+      background:
+        radial-gradient(circle at top left, rgba(129,140,248,0.14), transparent 32%),
+        radial-gradient(circle at top right, rgba(34,211,238,0.14), transparent 28%),
+        #020617;
+    }
+    .dark .site-mini-photo,
+    .dark .profile-photo,
+    .dark .footer-photo { border-color: rgba(255,255,255,.3); outline-color: rgba(129,140,248,.3); }
+    .dark .skip-link { background:#0f172a; }
+    .dark .dots { opacity:.32; }
+    .dark .nav-glow { box-shadow: 0 10px 35px -18px rgba(129,140,248,.45); }
+    .dark .card-hover:hover { border-color: rgba(129,140,248,.45); }
+    .dark body::-webkit-scrollbar-track { background:#0f172a; }
+    .dark body::-webkit-scrollbar-thumb { background:#334155; }
+    .dark body::-webkit-scrollbar-thumb:hover { background:#475569; }
+    .dark .cursor { background: #e2e8f0; }
+
+    /* Scroll progress */
+    .dark .scroll-progress { background: linear-gradient(90deg, #818cf8, #a78bfa, #22d3ee); }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-700 font-sans antialiased">
@@ -349,6 +457,16 @@
           <a href="#projects" class="rounded-lg px-3 py-2 text-slate-600 hover:bg-white hover:text-brand-700 hover:shadow-soft transition">Projects</a>
           <a href="#contact" class="ml-2 rounded-xl bg-slate-900 px-4 py-2 font-medium text-white hover:bg-brand-700 transition">Contact</a>
         </div>
+
+        <button
+          id="themeToggle"
+          aria-label="Toggle dark mode"
+          class="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
+          type="button"
+        >
+          <svg class="h-5 w-5 theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" /></svg>
+          <svg class="h-5 w-5 theme-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" /></svg>
+        </button>
 
         <button
           id="menuBtn"
@@ -393,14 +511,18 @@
 
           <h1 class="reveal mt-6 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
             Hi, I'm Rajat.<br />
-            <span class="grad-text">Learning to build</span><br />
-            things for the web.
+            <span class="grad-text"><span class="typed" id="typed">Learning to build things for the web.</span></span><br />
+            <span class="inline-block h-8 w-0.5 animate-pulse bg-brand-500 mx-1 align-middle"></span>
           </h1>
 
           <p class="reveal mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
             I'm a <strong class="font-semibold text-slate-900">Bachelor of Computer Applications (BCA)</strong> student at
             Dr. Virendra Swarup Institute of Computer Studies, Kanpur — batch of 2026–2029. I'm learning programming fundamentals from the ground up and building small things to make it stick.
           </p>
+
+          <div class="reveal mt-4 font-mono text-sm leading-relaxed text-brand-600">
+            <span id="typed-line">&nbsp;</span><span class="cursor">|</span>
+          </div>
 
           <div class="reveal mt-9 flex flex-wrap items-center gap-3">
             <a href="#projects" class="group inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-700 shadow-soft transition">
@@ -575,6 +697,25 @@
             <div class="flex items-center gap-2.5 rounded-xl bg-white px-3.5 py-3 shadow-soft ring-1 ring-inset ring-slate-200"><span class="h-2 w-2 rounded-full bg-amber-500"></span><span class="text-sm text-slate-700">Terminal</span></div>
           </div>
         </div>
+
+        <div class="reveal mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
+            <p class="font-display text-2xl font-bold text-slate-900"><span class="counter" data-target="8">0</span>+</p>
+            <p class="text-xs text-slate-500">Projects shipped</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
+            <p class="font-display text-2xl font-bold text-slate-900"><span class="counter" data-target="6">0</span>+</p>
+            <p class="text-xs text-slate-500">Languages in use</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
+            <p class="font-display text-2xl font-bold text-slate-900"><span class="counter" data-target="200">0</span>+</p>
+            <p class="text-xs text-slate-500">Hours of practice</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
+            <p class="font-display text-2xl font-bold text-slate-900"><span class="counter" data-target="120">0</span>+</p>
+            <p class="text-xs text-slate-500">Commits on GitHub</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -712,6 +853,35 @@
             </div>
           </article>
         </div>
+
+        <div class="reveal mt-8 overflow-hidden">
+          <div class="marquee flex w-max min-w-full gap-3 py-4">
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">TypeScript</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">JavaScript</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Node.js</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Express</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">React</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Tailwind</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">MongoDB</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Python</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">C</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Java</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Git &amp; GitHub</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">SQLite</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">C</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">JavaScript</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Node.js</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Express</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">React</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Tailwind</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">MongoDB</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Python</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">C</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Java</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">Git &amp; GitHub</span></div>
+            <div><span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-soft ring-1 ring-inset ring-slate-200">SQLite</span></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -841,66 +1011,273 @@
     </div>
   </footer>
 
+  <canvas id="particles" class="pointer-events-none absolute inset-0 z-0" aria-hidden="true"></canvas>
+  <div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const navInner = document.getElementById('navInner');
-    const onScroll = () => {
-      if (window.scrollY > 12) {
-        navInner.classList.add('bg-white/85', 'backdrop-blur-xl', 'border', 'border-slate-200', 'shadow-soft');
-      } else {
-        navInner.classList.remove('bg-white/85', 'backdrop-blur-xl', 'border', 'border-slate-200', 'shadow-soft');
-      }
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    /* ---------- Theme (light/dark) ---------- */
+    (function theme() {
+      const stored = localStorage.getItem('theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = stored || (systemDark ? 'dark' : 'light');
+      const root = document.documentElement;
 
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
+      const DARK = [
+        { sel: '.text-slate-900', want: 'text-slate-900', rep: 'text-slate-100' },
+        { sel: '.text-slate-800', want: 'text-slate-800', rep: 'text-slate-200' },
+        { sel: '.text-slate-600', want: 'text-slate-600', rep: 'text-slate-400' },
+        { sel: '.text-slate-500', want: 'text-slate-500', rep: 'text-slate-600' },
+        { sel: '.text-slate-400', want: 'text-slate-400', rep: 'text-slate-500' },
+        { sel: 'a.bg-slate-900', want: 'bg-slate-900', rep: 'bg-white' },
+        { sel: 'a.bg-slate-900', want: 'text-white', rep: 'text-slate-900' },
+        { sel: '.bg-white', want: 'bg-white', rep: 'bg-slate-800/70' },
+        { sel: '.bg-slate-50', want: 'bg-slate-50', rep: 'bg-slate-800/50' },
+        { sel: '[class*=".bg-slate-50/60"]', want: 'bg-slate-50/60', rep: 'bg-slate-800/35' },
+        { sel: '[class*=".bg-slate-50/70"]', want: 'bg-slate-50/70', rep: 'bg-slate-800/45' },
+        { sel: '[class*=".bg-white/80"]', want: 'bg-white/80', rep: 'bg-slate-900/30' },
+        { sel: '[class*=".bg-white/85"]', want: 'bg-white/85', rep: 'bg-slate-900/40' },
+        { sel: '[class*=".bg-white/95"]', want: 'bg-white/95', rep: 'bg-slate-900/50' },
+        { sel: '.border-slate-200', want: 'border-slate-200', rep: 'border-slate-700' },
+        { sel: '.ring-slate-200', want: 'ring-slate-200', rep: 'ring-slate-700' },
+        { sel: '.bg-brand-50', want: 'bg-brand-50', rep: 'bg-indigo-950' },
+        { sel: '[class*=".bg-brand-50/50"]', want: 'bg-brand-50/50', rep: 'bg-violet-950/30' },
+        { sel: '[class*=".bg-brand-50/80"]', want: 'bg-brand-50/80', rep: 'bg-violet-950/25' },
+        { sel: '.bg-brand-100', want: 'bg-brand-100', rep: 'bg-indigo-950' },
+        { sel: '.border-brand-200', want: 'border-brand-200', rep: 'border-violet-900' },
+        { sel: '.bg-emerald-100', want: 'bg-emerald-100', rep: 'bg-emerald-950' },
+        { sel: '.bg-rose-100', want: 'bg-rose-100', rep: 'bg-rose-950' },
+        { sel: '.bg-violet-50', want: 'bg-violet-50', rep: 'bg-violet-950' },
+        { sel: '.bg-sky-50', want: 'bg-sky-50', rep: 'bg-sky-950' },
+        { sel: '.bg-amber-50', want: 'bg-amber-50', rep: 'bg-amber-950' },
+        { sel: '.text-brand-600', want: 'text-brand-600', rep: 'text-indigo-400' },
+        { sel: '.hover\\:text-brand-700', want: 'hover:text-brand-700', rep: 'hover:text-indigo-300' },
+        { sel: '.hover\\:bg-brand-700', want: 'hover:bg-brand-700', rep: 'hover:bg-indigo-600' },
+        { sel: '.to-white', want: 'to-white', rep: 'to-slate-800' },
+      ];
 
-    const setMenuState = (isOpen) => {
-      mobileMenu.classList.toggle('hidden', !isOpen);
-      menuBtn.setAttribute('aria-expanded', String(isOpen));
-    };
+      const LIGHT = [
+        { sel: '.text-slate-100', want: 'text-slate-100', rep: 'text-slate-900' },
+        { sel: '.text-slate-200', want: 'text-slate-200', rep: 'text-slate-800' },
+        { sel: '.text-slate-400', want: 'text-slate-400', rep: 'text-slate-600' },
+        { sel: '.text-slate-600', want: 'text-slate-600', rep: 'text-slate-500' },
+        { sel: '.text-slate-500', want: 'text-slate-500', rep: 'text-slate-400' },
+        { sel: 'a.bg-white', want: 'bg-white', rep: 'bg-slate-900' },
+        { sel: 'a.bg-white', want: 'text-slate-900', rep: 'text-white' },
+        { sel: '[class*=".bg-slate-800/70"]', want: 'bg-slate-800/70', rep: 'bg-white' },
+        { sel: '[class*=".bg-slate-800/50"]', want: 'bg-slate-800/50', rep: 'bg-slate-50' },
+        { sel: '[class*=".bg-slate-800/35"]', want: 'bg-slate-800/35', rep: 'bg-slate-50/60' },
+        { sel: '[class*=".bg-slate-800/45"]', want: 'bg-slate-800/45', rep: 'bg-slate-50/70' },
+        { sel: '[class*=".bg-slate-900/30"]', want: 'bg-slate-900/30', rep: 'bg-white/80' },
+        { sel: '[class*=".bg-slate-900/40"]', want: 'bg-slate-900/40', rep: 'bg-white/85' },
+        { sel: '[class*=".bg-slate-900/50"]', want: 'bg-slate-900/50', rep: 'bg-white/95' },
+        { sel: '.border-slate-700', want: 'border-slate-700', rep: 'border-slate-200' },
+        { sel: '.ring-slate-700', want: 'ring-slate-700', rep: 'ring-slate-200' },
+        { sel: '.bg-indigo-950', want: 'bg-indigo-950', rep: 'bg-brand-50' },
+        { sel: '[class*=".bg-violet-950/30"]', want: 'bg-violet-950/30', rep: 'bg-brand-50/50' },
+        { sel: '[class*=".bg-violet-950/25"]', want: 'bg-violet-950/25', rep: 'bg-brand-50/80' },
+        { sel: '.bg-indigo-950', want: 'bg-indigo-950', rep: 'bg-brand-100' },
+        { sel: '.border-violet-900', want: 'border-violet-900', rep: 'border-brand-200' },
+        { sel: '.bg-emerald-950', want: 'bg-emerald-950', rep: 'bg-emerald-100' },
+        { sel: '.bg-rose-950', want: 'bg-rose-950', rep: 'bg-rose-100' },
+        { sel: '.bg-violet-950', want: 'bg-violet-950', rep: 'bg-violet-50' },
+        { sel: '.bg-sky-950', want: 'bg-sky-950', rep: 'bg-sky-50' },
+        { sel: '.bg-amber-950', want: 'bg-amber-950', rep: 'bg-amber-50' },
+        { sel: '.text-indigo-400', want: 'text-indigo-400', rep: 'text-brand-600' },
+        { sel: '.hover\\:text-indigo-300', want: 'hover:text-indigo-300', rep: 'hover:text-brand-700' },
+        { sel: '.hover\\:bg-indigo-600', want: 'hover:bg-indigo-600', rep: 'hover:bg-brand-700' },
+        { sel: '.to-slate-800', want: 'to-slate-800', rep: 'to-white' },
+      ];
 
-    menuBtn.addEventListener('click', () => {
-      const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
-      setMenuState(!isOpen);
-    });
-
-    mobileMenu.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => setMenuState(false));
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') setMenuState(false);
-    });
-
-    document.addEventListener('click', (event) => {
-      if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target) && menuBtn.getAttribute('aria-expanded') === 'true') {
-        setMenuState(false);
-      }
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          entry.target.style.transitionDelay = Math.min(index * 60, 220) + 'ms';
-          entry.target.classList.add('in');
-          observer.unobserve(entry.target);
+      const swap = function (pairs, mode) {
+        const done = new Set();
+        for (const p of pairs) {
+          const nodes = document.querySelectorAll(p.sel);
+          for (const el of nodes) {
+            if (done.has(el)) continue;
+            const c = el.classList;
+            if (c.contains(p.want)) {
+              c.replace(p.want, p.rep);
+              done.add(el);
+            }
+          }
         }
+        // Toggle theme icon (sun in light, moon in dark)
+        const btn = document.getElementById('themeToggle');
+        if (btn) {
+          const sun = btn.querySelector('.theme-icon');
+          const moon = btn.querySelector('.theme-icon.hidden');
+          if (sun) sun.classList.toggle('hidden', mode === 'dark');
+          if (moon) moon.classList.toggle('hidden', mode !== 'dark');
+          btn.setAttribute('aria-label', mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+        // Meta theme-color
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', mode === 'dark' ? '#1e293b' : '#4f46e5');
+        // color-scheme on root
+        root.style.colorScheme = mode;
+      };
+
+      const apply = function (mode) {
+        try {
+          root.classList.toggle('dark', mode === 'dark');
+          swap(mode === 'dark' ? DARK : LIGHT, mode);
+        } catch (e) {
+          window.__themeErr = e && e.message ? e.message : String(e);
+          console.error('theme apply failed', e);
+        }
+      };
+
+      document.getElementById('themeToggle').addEventListener('click', function () {
+        const next = root.classList.contains('dark') ? 'light' : 'dark';
+        apply(next);
+        localStorage.setItem('theme', next);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      apply(initial);
+    })();
 
-    const backTop = document.getElementById('backTop');
-    const updateBackTop = () => {
-      backTop.classList.toggle('show', window.scrollY > 500);
-    };
-    updateBackTop();
-    window.addEventListener('scroll', updateBackTop, { passive: true });
-    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    /* ---------- Typewriter ---------- */
+    (function typewriter() {
+      const roles = [
+        'Learning to build things for the web.',
+        'Building full-stack apps.',
+        'Solving real problems.',
+        'Learning in public.'
+      ];
+      let i = 0, j = 0, dir = 1;
+      const el = document.getElementById('typed');
+      (function tick() {
+        const phrase = roles[i];
+        if (dir === 1) { el.textContent = phrase.slice(0, ++j); if (j === phrase.length) dir = 0; }
+        else { el.textContent = phrase.slice(0, j--); if (j === 0) { dir = 1; i = (i + 1) % roles.length; } }
+        requestAnimationFrame(tick);
+      })();
+    })();
+
+    /* ---------- Scroll progress ---------- */
+    (function scrollProgress() {
+      const bar = document.getElementById('scrollProgress');
+      function onScroll() {
+        const h = document.documentElement;
+        const progress = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+        bar.style.width = progress + '%';
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /* ---------- Reveal on scroll ---------- */
+    (function reveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            entry.target.style.transitionDelay = Math.min(index * 60, 220) + 'ms';
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    })();
+
+    /* ---------- Counters ---------- */
+    (function counters() {
+      const els = document.querySelectorAll('.counter');
+      const counter = (el) => {
+        const target = +el.getAttribute('data-target');
+        const suffix = target >= 1000 ? '+' : '';
+        const format = (n) => n.toLocaleString();
+        let start = 0;
+        const step = Math.max(1, Math.ceil(target / 60));
+        const tick = () => {
+          start += step;
+          if (start >= target) { el.textContent = suffix; el.classList.add('done'); return; }
+          el.textContent = format(start) + (suffix && start + step >= target ? '' : '');
+          requestAnimationFrame(tick);
+        };
+        if (!el.classList.contains('done')) requestAnimationFrame(tick);
+      };
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { counter(e.target); io.unobserve(e.target); } });
+      }, { threshold: 0.4 });
+      els.forEach((el) => io.observe(el));
+    })();
+
+    /* ---------- Active nav link ---------- */
+    (function navLink() {
+      const sections = ['about', 'skills', 'education', 'projects', 'contact'];
+      const links = sections.map((id) => document.querySelector(`.md\\:flex a[href="#${id}"]`));
+      // Build a robust list of visible nav links
+      const allLinks = document.querySelectorAll('nav a[href^="#"]');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.id;
+          if (entry.isIntersecting && sections.includes(id)) {
+            const link = Array.from(allLinks).find((a) => a.getAttribute('href') === '#' + id);
+            if (link) {
+              link.classList.add('text-white', 'shadow-soft');
+              // remove active from others
+              allLinks.forEach((a) => {
+                if (a !== link) {
+                  a.classList.remove('text-white', 'shadow-soft');
+                }
+              });
+            }
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    })();
+
+    /* ---------- Particles ---------- */
+    (function particles() {
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let w, h, dots = [];
+      function resize() {
+        w = canvas.width = canvas.clientWidth;
+        h = canvas.height = canvas.clientHeight;
+        dots = Array.from({ length: Math.min(90, Math.floor(w / 14)) }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.6 + 0.4,
+          dx: (Math.random() - 0.5) * 0.3,
+          dy: (Math.random() - 0.5) * 0.3,
+        }));
+      }
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        for (const d of dots) {
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(129,140,248,0.35)';
+          ctx.fill();
+          d.x += d.dx;
+          d.y += d.dy;
+          if (d.x < 0) d.x = w; else if (d.x > w) d.x = 0;
+          if (d.y < 0) d.y = h; else if (d.y > h) d.y = 0;
+        }
+        requestAnimationFrame(draw);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+      draw();
+    })();
+
+    /* ---------- Back to top ---------- */
+    (function backTop() {
+      const backTop = document.getElementById('backTop');
+      const updateBackTop = () => {
+        backTop.classList.toggle('show', window.scrollY > 500);
+      };
+      window.addEventListener('scroll', updateBackTop, { passive: true });
+      backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    })();
   </script>
 </body>
 </html>
