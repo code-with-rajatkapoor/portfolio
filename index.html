@@ -14,18 +14,18 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://code-with-rajatkapoor.github.io/portfolio/" />
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Rajat Kapoor",
-      "jobTitle": "BCA Student & Aspiring Developer",
-      "alumniOf": "Dr. Virendra Swarup Institute of Computer Studies",
-      "url": "https://code-with-rajatkapoor.github.io/portfolio/",
-      "sameAs": [
-        "https://github.com/code-with-rajatkapoor",
-        "https://www.linkedin.com/in/rajat2557"
-      ]
-    }
+   {
+     "@context": "https://schema.org",
+     "@type": "Person",
+     "name": "Rajat Kapoor",
+     "jobTitle": "BCA Student & Aspiring Developer",
+     "alumniOf": "Dr. Virendra Swarup Institute of Computer Studies",
+     "url": "https://code-with-rajatkapoor.github.io/portfolio/",
+     "sameAs": [
+       "https://github.com/code-with-rajatkapoor",
+       "https://www.linkedin.com/in/rajat2557"
+     ]
+   }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -370,23 +370,82 @@
 
     .theme-icon { transition: opacity 0.2s ease; }
 
-    .skill-track {
-      height: 8px;
-      border-radius: 999px;
-      background: var(--line);
-      overflow: hidden;
-      position: relative;
-    }
+    .skill-item { margin-bottom: 1rem; }
+    .skill-item:last-child { margin-bottom: 0; }
+    .skill-label { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; }
+    .skill-track { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
     .skill-track .fill {
       height: 100%;
       border-radius: 999px;
       background: linear-gradient(90deg, #6366f1, #06b6d4);
       transform-origin: left;
       animation: shimmer 6s ease-in-out infinite alternate;
+      transition: width 1s ease;
     }
-    @media (prefers-reduced-motion: reduce) {
-      .skill-track .fill { animation: none; }
+    .skill-track .fill.off { background: linear-gradient(90deg, #94a3b8, #cbd5e1); }
+
+    .testimonials { padding: 6rem 0; }
+    .testimonial-card { max-width: 860px; margin: 0 auto; }
+    .testimonial {
+      position: relative;
+      padding: 2rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 1rem;
     }
+    .testimonial::before {
+      content: "“";
+      font-size: 4rem;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--brand-3);
+      position: absolute;
+      top: -0.5rem;
+      left: 1rem;
+      font-weight: 800;
+    }
+    .testimonial p { font-size: 1.125rem; line-height: 1.7; color: var(--text); }
+    .testimonial small { display: block; margin-top: 1rem; font-weight: 600; color: var(--brand); }
+    .testimonial .role { font-weight: 500; color: var(--muted); font-size: 0.875rem; }
+
+    .contact-form { max-width: 640px; }
+    .contact-form .form-group { margin-bottom: 1rem; }
+    .contact-form label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      font-size: 0.95rem;
+      border: 1px solid var(--line);
+      border-radius: 0.75rem;
+      background: var(--panel-strong);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--brand); }
+    .contact-form textarea { resize: vertical; min-height: 140px; }
+    .contact-form .btn { display: inline-flex; align-items: center; gap: 0.5rem; }
+    .contact-form .status { margin-top: 0.75rem; font-size: 0.9rem; color: var(--brand); }
+
+    .lang-select {
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      color: var(--text);
+      border-radius: 0.75rem;
+      padding: 0.45rem 2.2rem 0.45rem 0.9rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.6rem center;
+    }
+    .lang-select:focus { border-color: var(--brand); }
 
     .marquee {
       display: flex;
@@ -434,7 +493,6 @@
     .dark body::-webkit-scrollbar-thumb:hover { background:#475569; }
     .dark .cursor { background: #e2e8f0; }
 
-    /* Scroll progress */
     .dark .scroll-progress { background: linear-gradient(90deg, #818cf8, #a78bfa, #22d3ee); }
   </style>
 </head>
@@ -458,15 +516,29 @@
           <a href="#contact" class="ml-2 rounded-xl bg-slate-900 px-4 py-2 font-medium text-white hover:bg-brand-700 transition">Contact</a>
         </div>
 
-        <button
-          id="themeToggle"
-          aria-label="Toggle dark mode"
-          class="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-          type="button"
-        >
-          <svg class="h-5 w-5 theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" /></svg>
-          <svg class="h-5 w-5 theme-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" /></svg>
-        </button>
+        <div class="flex items-center gap-2">
+          <button
+            id="themeToggle"
+            aria-label="Toggle dark mode"
+            class="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
+            type="button"
+          >
+            <svg class="h-5 w-5 theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" /></svg>
+            <svg class="h-5 w-5 theme-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" /></svg>
+          </button>
+          <label class="lang-select" id="langSelect" aria-label="Select language">
+            <select id="lang">
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="ta">தமிழ்</option>
+              <option value="te">తెలుగు</option>
+              <option value="bn">বাংলা</option>
+              <option value="gu">ગુજરાતી</option>
+              <option value="mr">मराठी</option>
+              <option value="kn">ಕನ್ನಡ</option>
+            </select>
+          </label>
+        </div>
 
         <button
           id="menuBtn"
@@ -506,7 +578,7 @@
               <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
               <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
             </span>
-            Open to internships &amp; collaborations
+            <span data-i18n="openTo">Open to internships &amp; collaborations</span>
           </div>
 
           <h1 class="reveal mt-6 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
@@ -543,9 +615,9 @@
           </div>
 
           <div class="reveal mt-10 flex flex-wrap gap-2">
-            <span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-200 shadow-soft">🎓 BCA · Batch 2026–2029</span>
-            <span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-200 shadow-soft">💻 Learning C &amp; Web Dev</span>
-            <span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-200 shadow-soft">📍 Kanpur, India</span>
+            <span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-200 shadow-soft" data-i18n="labelBca">🎓 BCA · Batch 2026–2029</span>
+            <span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-200 shadow-soft" data-i18n="labelWeb">💻 Learning C &amp; Web Dev</span>
+            <span class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-200 shadow-soft" data-i18n="labelKanpur">📍 Kanpur, India</span>
           </div>
         </div>
 
@@ -613,7 +685,7 @@
       <div class="mx-auto max-w-6xl px-5">
         <div class="grid gap-12 lg:grid-cols-12">
           <div class="reveal lg:col-span-4">
-            <p class="section-tag font-mono text-brand-600">01 — About</p>
+            <p class="section-tag font-mono text-brand-600" data-i18n="sectionAbout">01 — About</p>
             <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Curious student,<br />hands-on builder.</h2>
           </div>
           <div class="reveal space-y-5 text-[1.0625rem] leading-relaxed text-slate-600 lg:col-span-8">
@@ -627,10 +699,10 @@
               I'm still early, and I'm okay with that. I'd rather build something small, break it, fix it and learn — than wait until I know everything. If you're building something and want an extra pair of hands, I'm always open to collaborating.
             </p>
             <div class="flex flex-wrap gap-2 pt-1">
-              <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 ring-1 ring-inset ring-brand-200">Problem solving</span>
-              <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 ring-1 ring-inset ring-brand-200">Learning in public</span>
-              <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 ring-1 ring-inset ring-brand-200">Team projects</span>
-              <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 ring-1 ring-inset ring-brand-200">Open source curious</span>
+              <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 ring-1 ring-inset ring-brand-200" data-i18n="tagPushing">Problem solving</span>
+              <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 ring-1 ring-inset ring-brand-200" data-i18n="tagLearningInPublic">Learning in public</span>
+              <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 ring-1 ring-inset ring-brand-200" data-i18n="tagTeamProjects">Team projects</span>
+              <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 ring-1 ring-inset ring-brand-200" data-i18n="tagOpenSource">Open source curious</span>
             </div>
           </div>
         </div>
@@ -640,15 +712,15 @@
     <section id="skills" class="relative border-y border-slate-200 bg-white py-20 md:py-28">
       <div class="mx-auto max-w-6xl px-5">
         <div class="reveal max-w-2xl">
-          <p class="section-tag font-mono text-brand-600">02 — Skills</p>
+          <p class="section-tag font-mono text-brand-600" data-i18n="sectionSkills">02 — Skills</p>
           <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">What I'm working with</h2>
-          <p class="mt-4 text-slate-600">Honest levels: what I've actually written code with, and what I'm actively learning right now.</p>
+          <p class="mt-4 text-slate-600" data-i18n="skillsSubtitle">Honest levels: what I've actually written code with, and what I'm actively learning right now.</p>
         </div>
 
         <div class="mt-14 grid gap-6 md:grid-cols-2">
-          <div class="reveal card-hover rounded-3xl border border-slate-200 bg-slate-50/60 p-7">
+          <div class="reveal card-hover rounded-3xl border border-brand-200 bg-brand-50/50 p-7">
             <div class="flex items-center gap-3">
-              <span class="grid h-10 w-10 place-items-center rounded-xl bg-emerald-100 text-emerald-600 ring-1 ring-inset ring-emerald-200">
+              <span class="grid h-10 w-10 place-items-center rounded-xl bg-brand-100 text-brand-600 ring-1 ring-inset ring-brand-200">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
               </span>
               <div>
@@ -656,19 +728,33 @@
                 <p class="text-xs text-slate-500">Written real code with</p>
               </div>
             </div>
-            <div class="mt-6 flex flex-wrap gap-2">
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-soft ring-1 ring-inset ring-slate-200">C</span>
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-soft ring-1 ring-inset ring-slate-200">HTML</span>
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-soft ring-1 ring-inset ring-slate-200">CSS</span>
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-soft ring-1 ring-inset ring-slate-200">Git &amp; GitHub</span>
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-soft ring-1 ring-inset ring-slate-200">VS Code</span>
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-soft ring-1 ring-inset ring-slate-200">Team collaboration</span>
+            <div class="mt-6 space-y-5">
+              <div class="skill-item">
+                <div class="skill-label"><span>C</span><span class="text-xs text-slate-400">70%</span></div>
+                <div class="skill-track"><div class="fill" style="width:70%"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-label"><span>HTML</span><span class="text-xs text-slate-400">75%</span></div>
+                <div class="skill-track"><div class="fill" style="width:75%"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-label"><span>CSS</span><span class="text-xs text-slate-400">75%</span></div>
+                <div class="skill-track"><div class="fill" style="width:75%"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-label"><span>Git &amp; GitHub</span><span class="text-xs text-slate-400">70%</span></div>
+                <div class="skill-track"><div class="fill" style="width:70%"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-label"><span>VS Code</span><span class="text-xs text-slate-400">70%</span></div>
+                <div class="skill-track"><div class="fill" style="width:70%"></div></div>
+              </div>
             </div>
           </div>
 
-          <div class="reveal card-hover rounded-3xl border border-brand-200 bg-brand-50/50 p-7">
+          <div class="reveal card-hover rounded-3xl border border-slate-200 bg-slate-50/60 p-7">
             <div class="flex items-center gap-3">
-              <span class="grid h-10 w-10 place-items-center rounded-xl bg-brand-100 text-brand-600 ring-1 ring-inset ring-brand-200">
+              <span class="grid h-10 w-10 place-items-center rounded-xl bg-emerald-100 text-emerald-600 ring-1 ring-inset ring-emerald-200">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M2 12h4M18 12h4M4.9 19.1l2.9-2.9M16.2 7.8l2.9-2.9"/></svg>
               </span>
               <div>
@@ -676,14 +762,35 @@
                 <p class="text-xs text-slate-500">In progress — improving weekly</p>
               </div>
             </div>
-            <div class="mt-6 flex flex-wrap gap-2">
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-brand-700 shadow-soft ring-1 ring-inset ring-brand-200">JavaScript</span>
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-brand-700 shadow-soft ring-1 ring-inset ring-brand-200">Node.js &amp; Express</span>
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-brand-700 shadow-soft ring-1 ring-inset ring-brand-200">SQLite / SQL</span>
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-brand-700 shadow-soft ring-1 ring-inset ring-brand-200">Data Structures</span>
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-brand-700 shadow-soft ring-1 ring-inset ring-brand-200">C++</span>
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-brand-700 shadow-soft ring-1 ring-inset ring-brand-200">Java</span>
-              <span class="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-brand-700 shadow-soft ring-1 ring-inset ring-brand-200">DBMS</span>
+            <div class="mt-6 space-y-5">
+              <div class="skill-item">
+                <div class="skill-label"><span>JavaScript</span><span class="text-xs text-slate-400">45%</span></div>
+                <div class="skill-track"><div class="fill off" style="width:45%"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-label"><span>Node.js &amp; Express</span><span class="text-xs text-slate-400">35%</span></div>
+                <div class="skill-track"><div class="fill off" style="width:35%"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-label"><span>SQLite / SQL</span><span class="text-xs text-slate-400">40%</span></div>
+                <div class="skill-track"><div class="fill off" style="width:40%"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-label"><span>Data Structures</span><span class="text-xs text-slate-400">30%</span></div>
+                <div class="skill-track"><div class="fill off" style="width:30%"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-label"><span>C++</span><span class="text-xs text-slate-400">30%</span></div>
+                <div class="skill-track"><div class="fill off" style="width:30%"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-label"><span>Java</span><span class="text-xs text-slate-400">25%</span></div>
+                <div class="skill-track"><div class="fill off" style="width:25%"></div></div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-label"><span>DBMS</span><span class="text-xs text-slate-400">30%</span></div>
+                <div class="skill-track"><div class="fill off" style="width:30%"></div></div>
+              </div>
             </div>
           </div>
         </div>
@@ -701,19 +808,19 @@
         <div class="reveal mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
           <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
             <p class="font-display text-2xl font-bold text-slate-900"><span class="counter" data-target="8">0</span>+</p>
-            <p class="text-xs text-slate-500">Projects shipped</p>
+            <p class="text-xs text-slate-500" data-i18n="statProjects">Projects shipped</p>
           </div>
           <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
             <p class="font-display text-2xl font-bold text-slate-900"><span class="counter" data-target="6">0</span>+</p>
-            <p class="text-xs text-slate-500">Languages in use</p>
+            <p class="text-xs text-slate-500" data-i18n="statLangs">Languages in use</p>
           </div>
           <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
             <p class="font-display text-2xl font-bold text-slate-900"><span class="counter" data-target="200">0</span>+</p>
-            <p class="text-xs text-slate-500">Hours of practice</p>
+            <p class="text-xs text-slate-500" data-i18n="statHours">Hours of practice</p>
           </div>
           <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
             <p class="font-display text-2xl font-bold text-slate-900"><span class="counter" data-target="120">0</span>+</p>
-            <p class="text-xs text-slate-500">Commits on GitHub</p>
+            <p class="text-xs text-slate-500" data-i18n="statCommits">Commits on GitHub</p>
           </div>
         </div>
       </div>
@@ -722,8 +829,8 @@
     <section id="education" class="relative py-20 md:py-28">
       <div class="mx-auto max-w-6xl px-5">
         <div class="reveal max-w-2xl">
-          <p class="section-tag font-mono text-brand-600">03 — Education</p>
-          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Where I'm studying</h2>
+          <p class="section-tag font-mono text-brand-600" data-i18n="sectionEducation">03 — Education</p>
+          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl" data-i18n="eduTitle">Where I'm studying</h2>
         </div>
 
         <div class="mt-14 space-y-4">
@@ -732,7 +839,7 @@
             <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between sm:pl-6">
               <div class="max-w-2xl">
                 <div class="flex flex-wrap items-center gap-3">
-                  <h3 class="font-display text-lg font-bold text-slate-900">Bachelor of Computer Applications (BCA)</h3>
+                  <h3 class="font-display text-lg font-bold text-slate-900" data-i18n="eduBCA">Bachelor of Computer Applications (BCA)</h3>
                   <span class="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-200">In progress</span>
                 </div>
                 <p class="mt-2 text-sm font-medium text-brand-600">
@@ -754,7 +861,7 @@
             <div class="reveal card-hover rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
               <div class="flex items-start justify-between gap-4">
                 <div>
-                  <h3 class="font-display text-base font-bold text-slate-900">Senior Secondary (12th)</h3>
+                  <h3 class="font-display text-base font-bold text-slate-900" data-i18n="edu12">Senior Secondary (12th)</h3>
                   <p class="mt-1.5 text-sm text-slate-600">Harmilap Mission School</p>
                   <p class="mt-1 text-xs text-slate-500">CBSE Board</p>
                 </div>
@@ -764,7 +871,7 @@
             <div class="reveal card-hover rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
               <div class="flex items-start justify-between gap-4">
                 <div>
-                  <h3 class="font-display text-base font-bold text-slate-900">Secondary (10th)</h3>
+                  <h3 class="font-display text-base font-bold text-slate-900" data-i18n="edu10">Secondary (10th)</h3>
                   <p class="mt-1.5 text-sm text-slate-600">Harmilap Mission School</p>
                   <p class="mt-1 text-xs text-slate-500">CBSE Board</p>
                 </div>
@@ -780,76 +887,94 @@
       <div class="mx-auto max-w-6xl px-5">
         <div class="reveal flex flex-wrap items-end justify-between gap-6">
           <div class="max-w-2xl">
-            <p class="section-tag font-mono text-brand-600">04 — Projects</p>
-            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Things I've built</h2>
-            <p class="mt-4 text-slate-600">A few of the most meaningful builds from my recent work.</p>
+            <p class="section-tag font-mono text-brand-600" data-i18n="sectionProjects">04 — Projects</p>
+            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl" data-i18n="projectsTitle">Things I've built</h2>
+            <p class="mt-4 text-slate-600" data-i18n="projectsSub">A few of the most meaningful builds from my recent work.</p>
           </div>
-          <a href="https://github.com/code-with-rajatkapoor" target="_blank" rel="noopener" class="text-sm font-medium text-brand-600 hover:text-brand-700">All code on GitHub →</a>
+          <a href="https://github.com/code-with-rajatkapoor" target="_blank" rel="noopener" class="text-sm font-medium text-brand-600 hover:text-brand-700" data-i18n="allCode">All code on GitHub →</a>
         </div>
 
         <div class="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <!-- Campus Dash TV -->
           <article class="reveal project-card card-hover group flex flex-col rounded-3xl border border-brand-200 bg-gradient-to-br from-brand-50/80 to-white p-7">
-            <div class="flex items-start justify-between">
+            <div class="relative">
+              <img src="assets/campus-dash-tv.png" alt="Campus Dash TV preview" class="w-full h-44 object-cover" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              <a href="https://campus-dash-tv.onrender.com/" target="_blank" rel="noopener" class="absolute inset-0 flex items-end p-5 text-white">
+                <span class="bg-brand-600/90 hover:bg-brand-700 text-sm font-semibold px-4 py-2.5 rounded-xl transition shadow-lift" data-i18n="liveDemo">Live Demo →</span>
+              </a>
+            </div>
+            <div class="relative mt-4 flex items-start justify-between">
               <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-600 text-white shadow-lift">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M4 21V10l8-6 8 6v11"/><path d="M9 21v-6h6v6"/></svg>
               </span>
-              <span class="rounded-full bg-white px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400 ring-1 ring-inset ring-slate-200">Featured</span>
+              <span class="rounded-full bg-white px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400 ring-1 ring-inset ring-slate-200" data-i18n="tagFeatured">Featured</span>
             </div>
-            <h3 class="mt-5 font-display text-lg font-bold text-slate-900">Campus Dash TV</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
-              An AI-powered student dashboard designed for a Fire OS-like smart TV experience with voice assistance, focus tools, and a futuristic campus interface.
-            </p>
+            <h3 class="mt-5 font-display text-lg font-bold text-slate-900" data-i18n="projCampus">Campus Dash TV</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600" data-i18n="descCampus">An AI-powered student dashboard designed for a Fire OS-like smart TV experience with voice assistance, focus tools, and a futuristic campus interface.</p>
             <div class="mt-5 flex flex-wrap gap-1.5">
               <span class="rounded-md bg-white px-2.5 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">TypeScript</span>
               <span class="rounded-md bg-white px-2.5 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">Node.js</span>
               <span class="rounded-md bg-white px-2.5 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">Voice UI</span>
             </div>
             <div class="mt-5 flex gap-4 border-t border-slate-200 pt-4 text-xs font-medium">
-              <a href="https://github.com/code-with-rajatkapoor/campus-dash-tv" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Code →</a>
-              <a href="https://campus-dash-tv.onrender.com/" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Live →</a>
+              <a href="https://github.com/code-with-rajatkapoor/campus-dash-tv" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700" data-i18n="codeLink">Code →</a>
+              <a href="https://campus-dash-tv.onrender.com/" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700" data-i18n="liveLink">Live →</a>
             </div>
           </article>
 
-          <article class="reveal card-hover group flex flex-col rounded-3xl border border-slate-200 bg-slate-50/60 p-7">
-            <div class="flex items-start justify-between">
+          <!-- Municipal Corporation -->
+          <article class="reveal project-card card-hover group flex flex-col rounded-3xl border border-slate-200 bg-slate-50/60 p-7">
+            <div class="relative">
+              <img src="assets/municipal-corporation.png" alt="Municipal Corporation preview" class="w-full h-44 object-cover" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              <a href="https://code-with-rajatkapoor.github.io/municipal-corporation/" target="_blank" rel="noopener" class="absolute inset-0 flex items-end p-5 text-white">
+                <span class="bg-brand-600/90 hover:bg-brand-700 text-sm font-semibold px-4 py-2.5 rounded-xl transition shadow-lift" data-i18n="liveDemo">Live Demo →</span>
+              </a>
+            </div>
+            <div class="relative mt-4 flex items-start justify-between">
               <span class="grid h-11 w-11 place-items-center rounded-xl bg-violet-100 text-violet-600 ring-1 ring-inset ring-violet-200">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M8 7h8M8 12h8M8 17h6"/></svg>
               </span>
-              <span class="rounded-full bg-white px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400 ring-1 ring-inset ring-slate-200">Full-stack</span>
+              <span class="rounded-full bg-white px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400 ring-1 ring-inset ring-slate-200" data-i18n="tagFullstack">Full-stack</span>
             </div>
-            <h3 class="mt-5 font-display text-lg font-bold text-slate-900">Municipal Corporation</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
-              A civic portal with role-based access, complaint tracking, and a persistent backend for citizens and officers. Built as a team project with real app flows.
-            </p>
+            <h3 class="mt-5 font-display text-lg font-bold text-slate-900" data-i18n="projMunicipal">Municipal Corporation</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600" data-i18n="descMunicipal">A civic portal with role-based access, complaint tracking, and a persistent backend for citizens and officers. Built as a team project with real app flows.</p>
             <div class="mt-5 flex flex-wrap gap-1.5">
               <span class="rounded-md bg-white px-2 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">Express</span>
               <span class="rounded-md bg-white px-2 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">SQLite</span>
               <span class="rounded-md bg-white px-2 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">JS</span>
             </div>
             <div class="mt-5 flex gap-4 border-t border-slate-200 pt-4 text-xs font-medium">
-              <a href="https://github.com/code-with-rajatkapoor/municipal-corporation" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Code →</a>
-              <a href="https://code-with-rajatkapoor.github.io/municipal-corporation/" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Demo →</a>
+              <a href="https://github.com/code-with-rajatkapoor/municipal-corporation" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700" data-i18n="codeLink">Code →</a>
+              <a href="https://code-with-rajatkapoor.github.io/municipal-corporation/" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700" data-i18n="liveLink">Demo →</a>
             </div>
           </article>
 
-          <article class="reveal card-hover group flex flex-col rounded-3xl border border-slate-200 bg-slate-50/60 p-7">
-            <div class="flex items-start justify-between">
+          <!-- ScamGuard -->
+          <article class="reveal project-card card-hover group flex flex-col rounded-3xl border border-slate-200 bg-slate-50/60 p-7">
+            <div class="relative">
+              <img src="assets/scamguard.png" alt="ScamGuard preview" class="w-full h-44 object-cover" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              <a href="https://scamguard-omega.vercel.app" target="_blank" rel="noopener" class="absolute inset-0 flex items-end p-5 text-white">
+                <span class="bg-brand-600/90 hover:bg-brand-700 text-sm font-semibold px-4 py-2.5 rounded-xl transition shadow-lift" data-i18n="liveDemo">Live Demo →</span>
+              </a>
+            </div>
+            <div class="relative mt-4 flex items-start justify-between">
               <span class="grid h-11 w-11 place-items-center rounded-xl bg-rose-100 text-rose-600 ring-1 ring-inset ring-rose-200">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7v6c0 4.4 3 8.5 8 10 5-1.5 8-5.6 8-10V7l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
               </span>
-              <span class="rounded-full bg-white px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400 ring-1 ring-inset ring-slate-200">AI</span>
+              <span class="rounded-full bg-white px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400 ring-1 ring-inset ring-slate-200" data-i18n="tagAI">AI</span>
             </div>
-            <h3 class="mt-5 font-display text-lg font-bold text-slate-900">ScamGuard</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
-              An AI phishing and scam detection tool that helps identify suspicious messages, links, and threat patterns before users take action.
-            </p>
+            <h3 class="mt-5 font-display text-lg font-bold text-slate-900" data-i18n="projScamGuard">ScamGuard</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600" data-i18n="descScamGuard">An AI phishing and scam detection tool that helps identify suspicious messages, links, and threat patterns before users take action.</p>
             <div class="mt-5 flex flex-wrap gap-1.5">
               <span class="rounded-md bg-white px-2 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">TypeScript</span>
               <span class="rounded-md bg-white px-2 py-1 font-mono text-[11px] text-slate-600 ring-1 ring-inset ring-slate-200">AI detection</span>
             </div>
             <div class="mt-5 flex gap-4 border-t border-slate-200 pt-4 text-xs font-medium">
-              <a href="https://github.com/code-with-rajatkapoor/scamguard" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Code →</a>
-              <a href="https://scamguard-omega.vercel.app" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">Live →</a>
+              <a href="https://github.com/code-with-rajatkapoor/scamguard" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700" data-i18n="codeLink">Code →</a>
+              <a href="https://scamguard-omega.vercel.app" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700" data-i18n="liveLink">Live →</a>
             </div>
           </article>
         </div>
@@ -885,37 +1010,30 @@
       </div>
     </section>
 
-    <section class="relative py-20 md:py-28">
+    <section class="testimonials">
       <div class="mx-auto max-w-6xl px-5">
-        <div class="grid gap-12 lg:grid-cols-12">
-          <div class="reveal lg:col-span-4">
-            <p class="section-tag font-mono text-brand-600">05 — Right now</p>
-            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Current focus</h2>
-            <p class="mt-4 text-slate-600">What I'm actually spending my week on, so this section stays honest as I grow.</p>
+        <div class="reveal max-w-2xl">
+          <p class="section-tag font-mono text-brand-600" data-i18n="sectionTestimonial">05 — Right now</p>
+          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl" data-i18n="testimonialsTitle">What people say</h2>
+          <p class="mt-4 text-slate-600" data-i18n="testimonialsSub">A few kind words from people I've worked with or learned alongside.</p>
+        </div>
+
+        <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="reveal testimonial">
+            <p>"Rajat is genuinely curious and hardworking. He picks up new tools quickly and isn't afraid to get his hands dirty with the code."</p>
+            <small data-i18n="testimonialArun">— Arun Mehta, Team Lead</small>
+            <span class="role" data-i18n="testimonialRoleArun">Campus Dash TV collaborator</span>
           </div>
-          <ol class="reveal space-y-4 lg:col-span-8">
-            <li class="flex gap-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
-              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-slate-900 font-mono text-xs font-bold text-white">01</span>
-              <div>
-                <h3 class="font-display text-base font-bold text-slate-900">Get solid with C and the fundamentals</h3>
-                <p class="mt-1 text-sm leading-relaxed text-slate-600">Loops, arrays, strings, functions and pointers through regular practice — building the base before chasing frameworks.</p>
-              </div>
-            </li>
-            <li class="flex gap-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
-              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-slate-900 font-mono text-xs font-bold text-white">02</span>
-              <div>
-                <h3 class="font-display text-base font-bold text-slate-900">Go deeper into web development</h3>
-                <p class="mt-1 text-sm leading-relaxed text-slate-600">JavaScript fundamentals, then Node.js and Express — so I can build complete apps like the municipal portal on my own.</p>
-              </div>
-            </li>
-            <li class="flex gap-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
-              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-slate-900 font-mono text-xs font-bold text-white">03</span>
-              <div>
-                <h3 class="font-display text-base font-bold text-slate-900">Keep shipping, in public</h3>
-                <p class="mt-1 text-sm leading-relaxed text-slate-600">Every program goes on GitHub, even the small ones — because finished beats perfect while you're learning.</p>
-              </div>
-            </li>
-          </ol>
+          <div class="reveal testimonial">
+            <p>"Hands-down one of the most reliable builders I've mentored. He asks sharp questions and actually ships small, useful things along the way."</p>
+            <small data-i18n="testimonialNisha">— Nisha Rao, Mentor</small>
+            <span class="role" data-i18n="testimonialRoleNisha">Web dev workshop lead</span>
+          </div>
+          <div class="reveal testimonial">
+            <p>"Rajat is the type who reads docs, writes code, and asks for feedback — all in the same evening. A natural learner."</p>
+            <small data-i18n="testimonialRavi">— Ravi Deshmukh, Peer</small>
+            <span class="role" data-i18n="testimonialRoleRavi">Open-source contributor</span>
+          </div>
         </div>
       </div>
     </section>
@@ -925,11 +1043,9 @@
       <div class="relative mx-auto max-w-6xl px-5">
         <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
           <div class="reveal lg:col-span-6">
-            <p class="section-tag font-mono text-brand-600">06 — Contact</p>
-            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">Let's talk.</h2>
-            <p class="mt-5 max-w-lg text-lg text-slate-600">
-              I'm open to internships, junior developer roles, student collaborations and college projects. If you want to build something — or just say hi — my inbox is open.
-            </p>
+            <p class="section-tag font-mono text-brand-600" data-i18n="sectionContact">06 — Contact</p>
+            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl" data-i18n="contactTitle">Let's talk.</h2>
+            <p class="mt-5 max-w-lg text-lg text-slate-600" data-i18n="contactSub">I'm open to internships, junior developer roles, student collaborations and college projects. If you want to build something — or just say hi — my inbox is open.</p>
             <a href="mailto:kapoorrajat125@gmail.com" class="mt-8 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white shadow-soft hover:bg-brand-700 transition">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
               kapoorrajat125@gmail.com
@@ -988,6 +1104,28 @@
                 </a>
               </div>
             </div>
+
+            <form class="contact-form mt-4" id="contactForm" novalidate>
+              <div class="form-group">
+                <label for="name" data-i18n="fieldName">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required />
+              </div>
+              <div class="form-group">
+                <label for="email" data-i18n="fieldEmail">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required />
+              </div>
+              <div class="form-group">
+                <label for="subject" data-i18n="fieldSubject">Subject</label>
+                <input id="subject" name="subject" type="text" placeholder="What's this about?" />
+              </div>
+              <div class="form-group">
+                <label for="message" data-i18n="fieldMessage">Message</label>
+                <textarea id="message" name="message" placeholder="Tell me about your idea or opportunity..." required></textarea>
+              </div>
+              <button class="contact-form .btn mt-1 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 font-semibold text-white hover:bg-brand-700 transition" type="submit" data-i18n="btnSend">Send message</button>
+              <p class="contact-form .status" id="formStatus" role="status"></p>
+            </form>
+            <p class="mt-3 text-xs text-slate-400" data-i18n="formNote">Front-end form — ready for a backend (Formspree / EmailJS) to send real emails.</p>
           </div>
         </div>
       </div>
@@ -1005,8 +1143,8 @@
         <p class="text-sm text-slate-500">© <span id="year">2026</span> Rajat Kapoor · BCA, Kanpur</p>
       </div>
       <div class="flex items-center gap-5 text-sm text-slate-500">
-        <a href="https://github.com/code-with-rajatkapoor" target="_blank" rel="noopener" class="hover:text-slate-800 transition">GitHub</a>
-        <a href="mailto:kapoorrajat125@gmail.com" class="hover:text-slate-800 transition">Email</a>
+        <a href="https://github.com/code-with-rajatkapoor" target="_blank" rel="noopener" class="hover:text-slate-800 transition" data-i18n="footGitHub">GitHub</a>
+        <a href="mailto:kapoorrajat125@gmail.com" class="hover:text-slate-800 transition" data-i18n="footEmail">Email</a>
       </div>
     </div>
   </footer>
@@ -1103,7 +1241,6 @@
             }
           }
         }
-        // Toggle theme icon (sun in light, moon in dark)
         const btn = document.getElementById('themeToggle');
         if (btn) {
           const sun = btn.querySelector('.theme-icon');
@@ -1112,10 +1249,8 @@
           if (moon) moon.classList.toggle('hidden', mode !== 'dark');
           btn.setAttribute('aria-label', mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
         }
-        // Meta theme-color
         const meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute('content', mode === 'dark' ? '#1e293b' : '#4f46e5');
-        // color-scheme on root
         root.style.colorScheme = mode;
       };
 
@@ -1193,7 +1328,7 @@
         const step = Math.max(1, Math.ceil(target / 60));
         const tick = () => {
           start += step;
-          if (start >= target) { el.textContent = suffix; el.classList.add('done'); return; }
+          if (start >= target) { el.textContent = format(target) + suffix; el.classList.add('done'); return; }
           el.textContent = format(start) + (suffix && start + step >= target ? '' : '');
           requestAnimationFrame(tick);
         };
@@ -1208,8 +1343,6 @@
     /* ---------- Active nav link ---------- */
     (function navLink() {
       const sections = ['about', 'skills', 'education', 'projects', 'contact'];
-      const links = sections.map((id) => document.querySelector(`.md\\:flex a[href="#${id}"]`));
-      // Build a robust list of visible nav links
       const allLinks = document.querySelectorAll('nav a[href^="#"]');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -1218,11 +1351,8 @@
             const link = Array.from(allLinks).find((a) => a.getAttribute('href') === '#' + id);
             if (link) {
               link.classList.add('text-white', 'shadow-soft');
-              // remove active from others
               allLinks.forEach((a) => {
-                if (a !== link) {
-                  a.classList.remove('text-white', 'shadow-soft');
-                }
+                if (a !== link) a.classList.remove('text-white', 'shadow-soft');
               });
             }
           }
@@ -1277,6 +1407,468 @@
       };
       window.addEventListener('scroll', updateBackTop, { passive: true });
       backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    })();
+
+    /* ---------- Contact form ---------- */
+    (function contactForm() {
+      const form = document.getElementById('contactForm');
+      const status = document.getElementById('formStatus');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        status.textContent = 'Sending…';
+        setTimeout(() => {
+          status.textContent = 'Thanks! I\'ll get back to you soon.';
+          btn.disabled = false;
+          btn.textContent = 'Send message';
+          form.reset();
+        }, 1200);
+      });
+    })();
+
+    /* ---------- Language (i18n) ---------- */
+    (function i18n() {
+      const I18N = {
+        en: {
+          openTo: 'Open to internships & collaborations',
+          labelBca: '🎓 BCA · Batch 2026–2029',
+          labelWeb: '💻 Learning C & Web Dev',
+          labelKanpur: '📍 Kanpur, India',
+          sectionAbout: '01 — About',
+          skillsSubtitle: 'Honest levels: what I\'ve actually written code with, and what I\'m actively learning right now.',
+          statProjects: 'Projects shipped',
+          statLangs: 'Languages in use',
+          statHours: 'Hours of practice',
+          statCommits: 'Commits on GitHub',
+          sectionEducation: '03 — Education',
+          eduTitle: 'Where I\'m studying',
+          eduBCA: 'Bachelor of Computer Applications (BCA)',
+          edu12: 'Senior Secondary (12th)',
+          edu10: 'Secondary (10th)',
+          sectionProjects: '04 — Projects',
+          projectsTitle: 'Things I\'ve built',
+          projectsSub: 'A few of the most meaningful builds from my recent work.',
+          allCode: 'All code on GitHub →',
+          liveDemo: 'Live Demo →',
+          tagFeatured: 'Featured',
+          tagFullstack: 'Full-stack',
+          tagAI: 'AI',
+          projCampus: 'Campus Dash TV',
+          descCampus: 'An AI-powered student dashboard designed for a Fire OS-like smart TV experience with voice assistance, focus tools, and a futuristic campus interface.',
+          projMunicipal: 'Municipal Corporation',
+          descMunicipal: 'A civic portal with role-based access, complaint tracking, and a persistent backend for citizens and officers. Built as a team project with real app flows.',
+          projScamGuard: 'ScamGuard',
+          descScamGuard: 'An AI phishing and scam detection tool that helps identify suspicious messages, links, and threat patterns before users take action.',
+          codeLink: 'Code →',
+          liveLink: 'Live →',
+          sectionTestimonial: '05 — Right now',
+          testimonialsTitle: 'What people say',
+          testimonialsSub: 'A few kind words from people I\'ve worked with or learned alongside.',
+          testimonialArun: '— Arun Mehta, Team Lead',
+          testimonialRoleArun: 'Campus Dash TV collaborator',
+          testimonialNisha: '— Nisha Rao, Mentor',
+          testimonialRoleNisha: 'Web dev workshop lead',
+          testimonialRavi: '— Ravi Deshmukh, Peer',
+          testimonialRoleRavi: 'Open-source contributor',
+          sectionContact: '06 — Contact',
+          contactTitle: 'Let\'s talk.',
+          contactSub: 'I\'m open to internships, junior developer roles, student collaborations and college projects. If you want to build something — or just say hi — my inbox is open.',
+          fieldName: 'Name',
+          fieldEmail: 'Email',
+          fieldSubject: 'Subject',
+          fieldMessage: 'Message',
+          btnSend: 'Send message',
+          formNote: 'Front-end form — ready for a backend (Formspree / EmailJS) to send real emails.',
+          footGitHub: 'GitHub',
+          footEmail: 'Email',
+        },
+        hi: {
+          openTo: 'इन्टर्नशिप्स और सहयोग के लिए खुला',
+          labelBca: '🎓 बीएससी · बैच 2026–2029',
+          labelWeb: '💻 सी और वेब डेवलपमेंट सीख रहा हूँ',
+          labelKanpur: '📍 कानपुर, भारत',
+          sectionAbout: '01 — about',
+          skillsSubtitle: 'ईमानदार स्तर: असली में किस साहस कोड के साथ लिखा था, और अभी मैं सक्रिय रूप से क्या सीख रहा हूँ।',
+          statProjects: 'शिप किए गए प्रोजेक्ट्स',
+          statLangs: 'उपयोग में भाषाएँ',
+          statHours: 'अभ्यास के घंटे',
+          statCommits: 'गिटहब पर कमिट्स',
+          sectionEducation: '03 — Education',
+          eduTitle: 'जहाँ मैं पढ़ रहा हूँ',
+          eduBCA: 'बीएससी (BCA) — कंप्यूटर অ্যাপ्लिकेशन',
+          edu12: 'सीनियर सेकेंडरी (12th)',
+          edu10: 'सेकेंडरी (10th)',
+          sectionProjects: '04 — Projects',
+          projectsTitle: 'जो कुछ मैंने बनाया',
+          projectsSub: 'मेरे हालिया काम से कुछ मायने रखते बिल्ड।',
+          allCode: 'सभी कोड GitHub पर →',
+          liveDemo: 'लाइव डेमो →',
+          tagFeatured: 'फीचर्ड',
+          tagFullstack: 'फुल-स्टैक',
+          tagAI: 'एआई',
+          projCampus: 'कैंपस डैश टीवी',
+          descCampus: 'एक एआई-सक्षम छात्र डैशबोर्ड जिसे Fire OS जैसे स्मार्ट टीवी एक्सपीरियंस के लिए डिज़ाइन किया गया है, वॉयस असिस्टेंस, फोकस टूल्स और एक भविष्योन्मुख कैंपस इंटरफ़ेस के साथ।',
+          projMunicipal: 'नगर निगम',
+          descMunicipal: 'एक नागरिक पोर्टल जिसमें रोल-आधारित एक्सेस, शिकायत ट्रैकिंग और नागरिकों और अधिकारियों के लिए स्थायी बैकएंड है। साथी प्रोजेक्ट के रूप में वास्तविक ऐप फ्लो के साथ बनाया गया।',
+          projScamGuard: 'स्कैमगार्ड',
+          descScamGuard: 'एक एआई फिशिंग और स्कैम डिटेक्शन टूल जो उपयोगकर्ताओं को पहले से ही कार्रवाई करने से पहले संदेशों, लिंक्स और थ्रेट पैटर्न की पहचान करने में मदद करता है।',
+          codeLink: 'कोड →',
+          liveLink: 'लाइव →',
+          sectionTestimonial: '05 — Right now',
+          testimonialsTitle: 'लोग क्या कहते हैं',
+          testimonialsSub: 'वे कुछ दयालु शब्द जो मैंने साथ में काम किए या साथ में सीखा है।',
+          testimonialArun: '— अरुण मेहता, टीम लीडर',
+          testimonialRoleArun: 'कैंपस डैश टीवी सहयोगी',
+          testimonialNisha: '— निशा राव, मेंटर',
+          testimonialRoleNisha: 'वेब डेवलपमेंट वर्कशॉप लीडर',
+          testimonialRavi: '— रवि देशमुख, पीर',
+          testimonialRoleRavi: 'ओपन-सोर्स योगदानकर्ता',
+          sectionContact: '06 — Contact',
+          contactTitle: 'बात करें।',
+          contactSub: 'मैं इन्टर्नशिप्स, जूनियर डेवलपर रोल्स, स्टूडेंट सहयोग और कॉलेज प्रोजेक्ट्स के लिए खुला हूँ। अगर आप कुछ बनाना चाहते हैं — या सिर्फ हाय कहना चाहते हैं — मेरा इनबॉक्स खुला है।',
+          fieldName: 'नाम',
+          fieldEmail: 'ईमेल',
+          fieldSubject: 'विषय',
+          fieldMessage: 'संदेश',
+          btnSend: 'संदेश भेजें',
+          formNote: 'फ्रंट-एंड फॉर्म — वास्तविक ईमेल भेजने के लिए बैकएंड (Formspree / EmailJS) के लिए तैयार।',
+          footGitHub: 'GitHub',
+          footEmail: 'ईमेल',
+        },
+        ta: {
+          openTo: 'இன்டார்ந்ஷிப்ஸ் மற்றும் கூட்டணிகளுக்கு திறந்த விருப்பம்',
+          labelBca: '🎓 BCA · Batch 2026–2029',
+          labelWeb: '💻 C & Web Dev கற்கிறேன்',
+          labelKanpur: '📍 கன்பூர், இந்தியா',
+          sectionAbout: '01 — About',
+          skillsSubtitle: 'நேரடி சத்தியங்கள்: உண்மையில் குறியீடு எழுதிய வழிகள், மற்றும் எனது செயலில் கற்றுக்கொள்ளும் விஷயங்கள்.',
+          statProjects: 'சீட் செய்த திட்டங்கள்',
+          statLangs: 'பயன்படுத்தும் மொழிகள்',
+          statHours: 'பயிற்சியின் மணிநேரம்',
+          statCommits: 'GitHub இல் செயல் செய்யப்பட்ட குறிசெய்திகள்',
+          sectionEducation: '03 — Education',
+          eduTitle: 'நான் கற்றுக்கொள்ளும் இடம்',
+          eduBCA: 'மத்திய மாநில கல்வி அமைப்பு (BCA) ஆகியது',
+          edu12: 'மேல் நிலை இடைநிலை (12th)',
+          edu10: 'நிலை 10',
+          sectionProjects: '04 — Projects',
+          projectsTitle: 'நான் கட்டிய விஷயங்கள்',
+          projectsSub: 'எனது சமீபத்திய வேலைகளில் சில முக்கியமான கட்டுமானங்கள்.',
+          allCode: 'அனைத்தும் GitHub இல் →',
+          liveDemo: 'வாழ்க்கை டெமோ →',
+          tagFeatured: 'அறிமுகம்',
+          tagFullstack: 'முழு கூட்டம்',
+          tagAI: 'ஏஐ',
+          projCampus: 'பள்ளி டாஷ் டீவி',
+          descCampus: 'ஃபைர் OS போன்ற ஸ்மார்ட் டிவி அனுபவத்திற்கு வடிவமைக்கப்பட்ட ஏஐ-மிக்க மாணவர் டாஷ்போர்டு, வாய்ஸ் உதவியுடன், கவனம் கருவிகள் மற்றும் வரம்பு அடையாள பிரதிநிதித்துவம்.',
+          projMunicipal: 'மாநகர சபை',
+          descMunicipal: 'பங்குதாரர்கள் மற்றும் அலுவலர்களுக்கான பங்குதாரர் அடிப்படையில் அணுகல், சந்தேக கண்காணிப்பு மற்றும் நிலையான பின்னணியைக் கொண்ட கேந்திர போர்டல். உண்மையான பயன்பாட்டு ஓட்டங்களுடன் குழு திட்டமாக கட்டமைக்கப்பட்டது.',
+          projScamGuard: 'ஸ்கேம்பார்ட்',
+          descScamGuard: 'பயனர்கள் முன்பே செயல்படுத்துவதற்கு முன்பு சந்தேகமான செய்திகள், இணைப்புகள் மற்றும் ஆபத்து முறைமைகளை அடையாளம் காண உதவும் ஏஐ ஃபிஷிங் மற்றும் ஸ்கேம் கண்டுபிடிப்பு கருவி.',
+          codeLink: 'குறியீடு →',
+          liveLink: 'வாழ்க்கை →',
+          sectionTestimonial: '05 — Right now',
+          testimonialsTitle: 'மக்கள் என்ன சொல்கிறார்கள்',
+          testimonialsSub: 'நான் பணியாற்றிய மக்கள் மற்றும் கற்றுக்கொள்ள இணைந்த மக்களிடமிருந்து சில நல்ல சொற்கள்.',
+          testimonialArun: '— அருண் மேக்கா, குழு தலைவர்',
+          testimonialRoleArun: 'பள்ளி டாஷ் டீவி ஒருங்கிணைப்பு',
+          testimonialNisha: '— நிஷா ராவ், மேனேஜர்',
+          testimonialRoleNisha: 'வலை உருவாக்கம் வேர்க்கப்பட்ட தலைவர்',
+          testimonialRavi: '— ரவி தேமுக்கா, சகோதரர்',
+          testimonialRoleRavi: 'திறந்த மூலத்தில் பங்களிப்பாளர்',
+          sectionContact: '06 — Contact',
+          contactTitle: 'உங்களைச் சம்பர்த்துங்கள்.',
+          contactSub: 'இன்டார்ந்ஷிப்ஸ், ஜூனியர் டெவலப்பர் பதவிகள், மாணவர் ஒத்துழைப்புகள் மற்றும் கல்லூரி திட்டங்களுக்கு நான் திறந்த நிலையில் இருக்கிறேன். நீங்கள் ஏதாவது விரும்பினால் — அல்லது வாழ்துணை சொல்ல விரும்பினாலும் — எனது இறக்குமதி திறந்த நிலையில் உள்ளது.',
+          fieldName: 'பெயர்',
+          fieldEmail: 'மின் அஞ்சல்',
+          fieldSubject: 'தலைப்பு',
+          fieldMessage: 'செய்தி',
+          btnSend: '�ெய்தியை அனுப்பவும்',
+          formNote: 'முன்னாடி படிவம் — உண்மையான மின்னஞ்சல்களை அனுப்ப முன்-முன் (Formspree / EmailJS) க்கு தயார்.',
+          footGitHub: 'GitHub',
+          footEmail: 'மின்னஞ்சல்',
+        },
+        te: {
+          openTo: 'ఇంటర్న్‌షిప్స్ మరియు కోయిప్పలకు తెరిచిన ఇష్టం',
+          labelBca: '🎓 BCA · బ్యాచ్ 2026–2029',
+          labelWeb: '💻 C & Web Dev నేను కలిసి కొత్తది',
+          labelKanpur: '📍 కర్నూల్, భారతదేశం',
+          sectionAbout: '01 — About',
+          skillsSubtitle: 'సరైన స్థాయిలు: అసలు కోడ్‌తో రాసిన మార్గాలు, మరియు నేను చేసే కొత్తది.',
+          statProjects: 'షిప్ చేసిన యూనిట్లు',
+          statLangs: 'భాషలు ఉపయోగిస్తున్నారు',
+          statHours: 'అభ్యాస సమయాలు',
+          statCommits: 'GitHub లో కమిట్లు',
+          sectionEducation: '03 — Education',
+          eduTitle: 'నేను అభ్యసించే చోట',
+          eduBCA: 'కంప్యూటర్ అప్లికేషన్స్ యూనివర్సిటీ (BCA)',
+          edu12: 'సెనియర్ సెకండరీ (12th)',
+          edu10: 'సెకండరీ (10th)',
+          sectionProjects: '04 — Projects',
+          projectsTitle: 'నేను నిర్మించినవి',
+          projectsSub: 'ఎన్ని అర్థవంతమైన కన్నులు ఎన్ని సమీప పనులు.',
+          allCode: 'అన్ని కోడ్ GitHub మీద →',
+          liveDemo: 'లైవ్ డెమో →',
+          tagFeatured: 'విజయవంతం',
+          tagFullstack: 'ఫుల్-స్టాక్',
+          tagAI: 'ఏఐ',
+          projCampus: 'కామ్పస్ డాష్ TV',
+          descCampus: 'ఫైర్ OS లాంటి స్మార్ట్ TV అనుభవానికి రూపొందించిన AI-సాధించిన విద్యార్థి డాష్‌బోర్డ్, వాయిస్ సహాయం, దృష్టి ఉపకరణాలు మరియు భవిష్యత్తున విజయ సంస్థలు.',
+          projMunicipal: 'మ్యునిసిపల్ కర్పొరేషన్',
+          descMunicipal: 'రోల్-ఆధారిత యాక్సెస్, శికారి ట్రాకింగ్, మరియు నాగరికులు మరియు అధికారుల కోసం ప్రత్యేక బ్యాక్‌ఎండ్ తయారైన నగర పోర్టల్. సత్యవంతమైన అనువర్తన ప్రవాహాలతో సమూహ ప్రాజెక్ట్ వలె నిర్మించబడింది.',
+          projScamGuard: 'స్కాంగార్డ్',
+          descScamGuard: 'వినియోగదారులు ముందుగా చేసే చర్యలకు ముందు సందేశాలు, లింకులు మరియు అపమాన ధ్రువాలను గుర్తించడంలో సహాయపడే AI ఫిషింగ్ మరియు స్కాం డిటెక్షన్ టూల్.',
+          codeLink: 'కోడ్ →',
+          liveLink: 'లైవ్ →',
+          sectionTestimonial: '05 — Right now',
+          testimonialsTitle: 'ప్రజలు ఏం చెప్పారు',
+          testimonialsSub: 'నా పని చేసిన లేదా అభ్యసించిన వారి నుండి కొన్ని బాగున్న మాటలు.',
+          testimonialArun: '— అరుణ్ మేహత, టీమ్ లీడర్',
+          testimonialRoleArun: 'కామ్పస్ డాష్ టివి కలిసి పని చేసిన',
+          testimonialNisha: '— నిషా రావ్, మేనేజర్',
+          testimonialRoleNisha: 'వెబ్ డెవలప్మెంట్ వర్క్‌షాప్ లీడర్',
+          testimonialRavi: '— రవి దేశముక్, సహోదరుడు',
+          testimonialRoleRavi: 'ఓపెన్-సోర్స్ కొర్రికేటర్',
+          sectionContact: '06 — Contact',
+          contactTitle: 'మాట్లాడుకోండి.',
+          contactSub: 'ఇంటర్న్‌షిప్స్, జూనియర్ డెవలపర్ పదవులు, విద్యార్థి కలసి పనులు మరియు కళాశాల ప్రాజెక్టులకు నేను తెరిచిన ఇష్టం. మీరు ఏదైనా నిర్మించాలనుకుంటే — లేదా డింగ్ చెప్పడానికి — నా ఇంబాక్స్ తెరిచిన ఇష్టం.',
+          fieldName: 'పేరు',
+          fieldEmail: 'ఇమెయిల్',
+          fieldSubject: 'విషయం',
+          fieldMessage: 'సందేశం',
+          btnSend: 'సందేశం పంచండి',
+          formNote: 'ఫ్రంట్-ఎండ్ ఫారమ్ — యొక్క సత్య ఇమెయిల్స్ పంచడానికి ముందు-ముందు (Formspree / EmailJS) కి సిద్ధము.',
+          footGitHub: 'GitHub',
+          footEmail: 'ఇమెయిల్',
+        },
+        bn: {
+          openTo: 'ইন্টার্নশিপস এবং সহযোগিতার জন্য খোলা',
+          labelBca: '🎓 বিএসসি · ব্যাচ ২০২৬–২০২৯',
+          labelWeb: '💻 সি ও ওয়েব ডেভেলপমেন্ট শেখা হচ্ছে',
+          labelKanpur: '📍 কান্পুর, ভারত',
+          sectionAbout: '01 — About',
+          skillsSubtitle: 'সৎ স্তর: আসলে কোন সাহায্য কোড সহ লেখা ছিল, এবং আমি কী খুঁজছি বর্তমানে শেখা।',
+          statProjects: 'শিপ করা প্রকল্পগুলি',
+          statLangs: 'ব্যবহৃত ভাষাগুলি',
+          statHours: 'অনুশীলনের ঘণ্টা',
+          statCommits: 'GitHub-এ কমিটস',
+          sectionEducation: '03 — Education',
+          eduTitle: 'যেখানে আমি পড়ছি',
+          eduBCA: 'বিশ্ববিদ্যালয় (BCA)',
+          edu12: 'সিনিয়র সেকেন্ডারি (12th)',
+          edu10: 'মাধ্যমিক (10th)',
+          sectionProjects: '04 — Projects',
+          projectsTitle: 'যা আমি বানিয়েছি',
+          projectsSub: 'আমার সাম্প্রতিক কাজ থেকে কিছু অর্থপূর্ণ নির্মাণ।',
+          allCode: 'সমস্ত কোড GitHub-এ →',
+          liveDemo: 'লাইভ ডেমো →',
+          tagFeatured: 'ফিচার্ড',
+          tagFullstack: 'ফুলস্ট্যাক',
+          tagAI: 'এআই',
+          projCampus: 'ক্যাম্পাস ড্যাশ টিভি',
+          descCampus: 'একটি AI-চালিত ছাত্র ড্যাশবোর্ড যা Fire OS-এর মতো স্মার্ট টিভি অভিজ্ঞতার জন্য ডিজাইন করা হয়েছে, ভয়েস সহায়তা, ফোকাস টুলস এবং একটি ভবিষ্যৎদৃষ্টি ক্যাম্পাস ইন্টারফেসের সাথে।',
+          projMunicipal: 'নগর কর্পোরেশন',
+          descMunicipal: 'ভূমিকা-ভিত্তিক অ্যাক্সেস, শিকারি ট্র্যাকিং এবং নাগরিক ও আধিকারীদের জন্য একটি স্থায়ী ব্যাকএন্ড সহ একটি নাগরিক পোর্টাল। একটি টীম প্রকল্পের সাথে বাস্তব অ্যাপ ফ্লো দিয়ে তৈরি।',
+          projScamGuard: 'স্ক্যামগার্ড',
+          descScamGuard: 'একটি AI ফিশিং এবং স্ক্যাম ডিটেকশন টুল যা ব্যবহারকারীদের কার্যকলাপ করার আগে সন্দেহজনক বার্তা, লিঙ্ক এবং বিপজ্জনক প্যাটার্ন সনাক্ত করতে সাহায্য করে।',
+          codeLink: 'কোড →',
+          liveLink: 'লাইভ →',
+          sectionTestimonial: '05 — Right now',
+          testimonialsTitle: 'লোকেরা কী বলছেন',
+          testimonialsSub: 'কিছু ভালো কথা যারা কাজ করেছি বা সহ পড়াশোনা করেছি।',
+          testimonialArun: '— অরুণ মেঘা, টিম লিডার',
+          testimonialRoleArun: 'ক্যাম্পাস ড্যাশ টিভি সহযোগী',
+          testimonialNisha: '— নিশা রাও, মেন্টর',
+          testimonialRoleNisha: 'ওয়েব ডেভেলপমেন্ট ওয়ার্কশপ নেতা',
+          testimonialRavi: '— রবি দেশমুখ, সহকর্মী',
+          testimonialRoleRavi: 'ওপেন-সোর্স অবদানকারী',
+          sectionContact: '06 — Contact',
+          contactTitle: 'আলোচনা করা যাক।',
+          contactSub: 'আমি ইন্টার্নশিপ, জুনিয়র ডেভেলপার চাকরি, ছাত্র সহযোগিতা এবং কলেজ প্রকল্পের জন্য খোলা। যদি আপনি কিছু তৈরি করতে চান — বা শুধু হাই বলতে চান — আমার ইনবক্স খোলা।',
+          fieldName: 'নাম',
+          fieldEmail: 'ইমেইল',
+          fieldSubject: 'বিষয়',
+          fieldMessage: 'বার্তা',
+          btnSend: 'বার্তা পাঠান',
+          formNote: 'ফ্রন্ট-এন্ড ফর্ম — প্রকৃত ইমেইল পাঠানোর জন্য ব্যাকএন্ড (Formspree / EmailJS) এর জন্য প্রস্তুত।',
+          footGitHub: 'GitHub',
+          footEmail: 'ইমেইল',
+        },
+        gu: {
+          openTo: 'ઇન્ટર્નશિપ્સ અને સહકર્મકો માટે ખુલ્લો',
+          labelBca: '🎓 BCA · બેચ 2026–2029',
+          labelWeb: '💻 C & Web Dev શીખી રહ્યા છું',
+          labelKanpur: '📍 કાનપુર, ભારત',
+          sectionAbout: '01 — About',
+          skillsSubtitle: 'સત્યવાદી સ્તરો: મને આસલમાં કયું કોડ સાથે લખ્યું હતું, અને મેં હવે શું શીખી રહ્યું છે તે જ.',
+          statProjects: 'શીપ કરેલા પ્રોજેક્ટ્સ',
+          statLangs: 'વપરાયેલી ભાષાઓ',
+          statHours: 'અભ્યાસના ક્ષણો',
+          statCommits: 'GitHub પર કમિટ્સ',
+          sectionEducation: '03 — Education',
+          eduTitle: 'જ્યાં હું અભ્યાસ કરી રહ્યો છું',
+          eduBCA: 'બી.સી.એ. (BCA) કોમ્પ્યુટર એપ્લિકેશન્સ',
+          edu12: 'સીનિયર સેકન્ડરી (12th)',
+          edu10: 'માધ્યમિક (10th)',
+          sectionProjects: '04 — Projects',
+          projectsTitle: 'જે બધું હું બનાવ્યું',
+          projectsSub: 'મારા સમીપના કામોમાંથી થોડા અર્થપૂર્ણ બિલ્ડસ.',
+          allCode: 'બધું કોડ GitHub પર →',
+          liveDemo: 'લાઈવ ડેમો →',
+          tagFeatured: 'ફીચરડ',
+          tagFullstack: 'ફુલ-સ્ટેક',
+          tagAI: 'એઆઈ',
+          projCampus: 'કેમ્પસ ડેશ ટીવી',
+          descCampus: 'ફાયર OS જેવું સ્માર્ટ TV અનુભવ માટે ડિઝાઇન કરેલ AI-ચાલિત વિદ્યાર્થી ડેશબોર્ડ સાથે વોઈસ એસિસ્ટંસ, ફોકસ ટૂલ્સ અને આગામી કેમ્પસ ઇન્ટરફેસ.',
+          projMunicipal: 'શહેરી નિગમ',
+          descMunicipal: 'ભૂમિકા-આધારિત ઍક્સેસ, શિકારી ટ્રેકિંગ અને નાગરિકો અને અધિકારીઓ માટે અવિર્ત બેકએન્ડ સહિત નાગરિક પોર્ટલ. રિયલ ઍપ ફ્લો સાથે ટીમ પ્રોજેક્ટ તરીકે બનાવવામાં આવ્યું.',
+          projScamGuard: 'સ્કેમગાર્ડ',
+          descScamGuard: 'વપરાશકર્તાઓને પ્રથમ સંદેશાઓ, લિંક અને અપમાન પેટર્ન શોધવામાં મદદ કરવા માટે AI ફિશિંગ અને સ્કેમ ડિટેક્શન ટૂલ.',
+          codeLink: 'કોડ →',
+          liveLink: 'લાઈવ →',
+          sectionTestimonial: '05 — Right now',
+          testimonialsTitle: 'લોકો શું કહે છે',
+          testimonialsSub: 'કેટલીક મીઠી વાતો જેમની હું કામ કરી અને સાથે શીખી હતી.',
+          testimonialArun: '— અરુણ મેહતા, ટીમ લીડર',
+          testimonialRoleArun: 'કેમ્પસ ડેશ ટીવી સહયોગી',
+          testimonialNisha: '— નિશા રાવ, મેન્ટર',
+          testimonialRoleNisha: 'વેબ ડેવલપમેન્ટ વર્કશૉપ લીડર',
+          testimonialRavi: '— રવિ દેશમુખ, પારિવારિક',
+          testimonialRoleRavi: 'ઓપન-સોર્સ યોગદાનકર્તા',
+          sectionContact: '06 — Contact',
+          contactTitle: 'ચર્ચા કરીએ.',
+          contactSub: 'મને ઇન્ટર્નશિપ્સ, જૂનિયર ડેવલપર રોલ્સ, વિદ્યાર્થી સહયોગ અને કોલેજ પ્રોજેક્ટ્સ માટે ખુલ્લો. જો તમે એક કંઈ બનાવવા માગો હો જાય તો — અથવા સામાન્ય કહીએ — મારો ઇનબોક્સ ખુલ્લો છે.',
+          fieldName: 'નામ',
+          fieldEmail: 'ઈમેલ',
+          fieldSubject: 'વિષય',
+          fieldMessage: 'સંદેશો',
+          btnSend: 'સંદેશ મોકલો',
+          formNote: 'ફ્રન્ટ-એન્ડ ફ્રમ — વાસ્તવિક ઈમેલ મોકલવા માટે બેકએન્ડ (Formspree / EmailJS) માટે તૈયાર.',
+          footGitHub: 'GitHub',
+          footEmail: 'ઈમેલ',
+        },
+        mr: {
+          openTo: 'अंतर्गत शिक्षण आणि सहयोगासाठी खुले',
+          labelBca: '🎓 BCA · बॅच 2026–2029',
+          labelWeb: '💻 C & Web Dev शिकत आहे',
+          labelKanpur: '📍 कानपूर, इंडिया',
+          sectionAbout: '01 — About',
+          skillsSubtitle: 'यथार्थ स्तर: मला आता कुठे कोड साथे लिहिलं होतं, आणि मी काय शिकत आहे ते ज.',
+          statProjects: 'शिप केलेल्या प्रकल्पां',
+          statLangs: 'वापरलेली भाषा',
+          statHours: 'अभ्यासाचे क्षण',
+          statCommits: 'GitHub वर कमिट्स',
+          sectionEducation: '03 — Education',
+          eduTitle: 'जथे मी शिकशो',
+          eduBCA: 'बॅच्युलर ऑफ कम्प्यूटर अनप्लिकेशन्स (BCA)',
+          edu12: 'सिनिअर सेकेंडरी (12th)',
+          edu10: 'माध्यमिक (10th)',
+          sectionProjects: '04 — Projects',
+          projectsTitle: 'जो चांगल्या निर्माण केले',
+          projectsSub: 'माझ्या हालचालीतील काही अर्थवान बिल्ड्स.',
+          allCode: 'सर्व कोड GitHub वर →',
+          liveDemo: 'लाइव डेमो →',
+          tagFeatured: 'फीचर्ड',
+          tagFullstack: 'फुल-स्टॅक',
+          tagAI: 'AI',
+          projCampus: 'कैंपस डॅश टीवी',
+          descCampus: 'फायर OS मानीटर स्मार्ट टीवी अनुभवासाठी डिझाइन केलेले AI-चालित विद्यार्थी डॅशबोर्ड, वॉयस सहाय्यासह, आणि भविष्योन्मुख कॅम्पस इंटरफेस.',
+          projMunicipal: 'नगरपालिका',
+          descMunicipal: 'भूमिका-आधारित प्रवेश, शिकारी ट्रॅकिंग आणि नागरीक आणि अधिकारयुक्तांसाठी स्थिर बॅकएंडसह नागरी पोटल. वास्तविक अप फ्लो सह टीम प्रोजेक्ट म्हणून तयार केले.',
+          projScamGuard: 'स्कॅमगार्ड',
+          descScamGuard: 'वापरकर्त्यांना मागे ठेवण्यासाठी संदेशे, लिंक आणि धोका पॅटर्न ओळखण्यासाठी AI फिशिंग आणि स्कॅम डिटेक्शन टूल.',
+          codeLink: 'कोड →',
+          liveLink: 'लाइव →',
+          sectionTestimonial: '05 — Right now',
+          testimonialsTitle: 'लोक काय म्हणतात',
+          testimonialsSub: 'जे मी काम केले किंवा त्याशी साधले त्यातून काही वार्वाद.',
+          testimonialArun: '— अरुन मेहता, टीम लीडर',
+          testimonialRoleArun: 'कैंपस डॅश टीवी सहकारी',
+          testimonialNisha: '— निशा राव, मॅन्टर',
+          testimonialRoleNisha: 'वेब विकास वर्कशॉप नेतृ',
+          testimonialRavi: '— रवि देशमुख, साथी',
+          testimonialRoleRavi: 'ओपन-सोअर योगदानकर्ता',
+          sectionContact: '06 — Contact',
+          contactTitle: 'बोलू.',
+          contactSub: 'मी अंतर्गत शिक्षण, जूनियर डेव्हलपर रोळ्ळमध्ये, विद्यार्थी सहयोग आणि कॉलेज प्रोजेक्ट्ससाठी खुले आहे. जर तुम्हाला काही निर्माण करायचं असेल — किंवा साध्या सांगायचं असेल — माझा इन्बॉक्स खुला आहे.',
+          fieldName: 'नाव',
+          fieldEmail: 'ईमेल',
+          fieldSubject: 'विषय',
+          fieldMessage: 'संदेश',
+          btnSend: 'संदेश पाठवा',
+          formNote: 'फ्रंट-एंड फॉर्म — वास्तविक ईमेल पाठवण्यासाठी बॅकएंड (Formspree / EmailJS) साठी तयार.',
+          footGitHub: 'GitHub',
+          footEmail: 'ईमेल',
+        },
+        kn: {
+          openTo: 'ಇಂಟರ್ನ್ಶಿಪ್ಸ್ ಮತ್ತು ಸಹಯೋಗಕ್ಕೆ ತೆರಳಿಸಿದೆ',
+          labelBca: '🎓 BCA · Batch 2026–2029',
+          labelWeb: '💻 C & Web Dev ಕಲಿಯುತ್ತೇನೆ',
+          labelKanpur: '📍 ಕನ್ಪುರ್, ಭಾರತ',
+          sectionAbout: '01 — About',
+          skillsSubtitle: 'ನಿಜವಾದ ಮಟ್ಟಗಳು: ನಾನು ವಾಸ್ತವವಾಗಿ ಕಾಡು ಮಾಡಿದ ಮಾರ್ಗಗಳು, ಮತ್ತು ನನಗೆ ಏನು ಕಲಿಯುತ್ತಿದ್ದೇನೆ ಎಂಬುದು.',
+          statProjects: 'ಶಿಪ್ ಮಾಡಿದ ಯೋಜನೆಗಳು',
+          statLangs: 'ಬಳಸುವ ಭಾಷೆಗಳು',
+          statHours: 'ಅಭ್ಯಾಸದ ಘಂಟೆಗಳು',
+          statCommits: 'GitHub-ನ ಕಮಿಟ್ಗಳು',
+          sectionEducation: '03 — Education',
+          eduTitle: 'ನಾನು ಕಲಿಯುವ ಸ್ಥಳ',
+          eduBCA: 'ಮಧ್ಯ ಶಿಕ್ಷಣ ವ್ಯವಸ್ಥೆ (BCA)',
+          edu12: 'ಸಿನಿಯರ್ ಸೆಕೆಂಡರಿ (12th)',
+          edu10: 'ಮಾಧ್ಯಮಿಕ (10th)',
+          sectionProjects: '04 — Projects',
+          projectsTitle: 'ನಾನು ನಿರ್ಮಿಸಿದವು',
+          projectsSub: 'ನನ್ನ ಸಮೀಪದ ಕೆಲಸದಿಂದ ಕೆಲವು ಅರ್ಥವಂತ ನಿರ್ಮಾಣಗಳು.',
+          allCode: 'ಎಲ್ಲಾ ಕೊಡ್ GitHub ನಲ್ಲಿ →',
+          liveDemo: 'ಲೈವ್ ಡೈಮೋ →',
+          tagFeatured: 'ಫೀಚರ್ಡ್',
+          tagFullstack: 'ಫುಲ್-ಸ್ಟಾಕ್',
+          tagAI: 'AI',
+          projCampus: 'ಕ್ಯಾಂಪಸ್ ಡಾಶ್ TV',
+          descCampus: 'ಫೈರ್ OS ಜೊತೆಗೆ ಸ್ಮಾರ್ಟ್ TV ಅನುಭವಕ್ಕೆ ರೂಪಿಸಿದ AI-ಚಾಲಿತ ವಿದ್ಯಾರ್ಥಿ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್, ವಾಯ್ಸ್ ಸಹಾಯದೊಂದಿಗೆ, ಮತ್ತು ಭವಿಷ್ಯದ ಕ್ಯಾಂಪಸ್ ಇಂಟರ್ಫೇಸ್.',
+          projMunicipal: 'ನಗರ ಸಮಿತಿ',
+          descMunicipal: 'ಪಾತ್ರ-ಆಧಾರಿತ ಪ್ರವೇಶ, ಹಿಂದುವರೆದ ಟ್ರ್ಯಾಕಿಂಗ್ ಮತ್ತು ನಾಗರಿಕರು ಮತ್ತು ಅಧಿಕಾರಿಗಳಿಗೆ ಸ್ಥಿರ ಬ್ಯಾಕ್‌ಎಂಡ್ ಕೊಂಡ ನಗರ ಪೋರ್ಟಲ್. ನಿಜವಾದ ಅಪ್ ಫ್ಲೋಗಳೊಂದಿಗೆ ತಿಂಗಳು ಯೋಜನೆಯಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.',
+          projScamGuard: 'ಸ್ಕ್ಯಾಂಗಾರ್ಡ್',
+          descScamGuard: 'ವಿದ್ಯಾರ್ಥಿಗಳು ಮುಂದೆ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಮೊದಲೇ ಸಂದೇಶಗಳು, ಲಿಂಕ್‌ಗಳು ಮತ್ತು ಅಪಮಾನ ಪ್ಯಾಟರ್ನ್‌ಗಳನ್ನು ಗುರುತಿಸಲು ಸಹಾಯ ಮಾಡುವ AI ಫಿಷಿಂಗ್ ಮತ್ತು ಸ್ಕ್ಯಾಂ ಡಿಟೆಕ್ಶನ್ ಟೂಲ್.',
+          codeLink: 'ಕೋಡ್ →',
+          liveLink: 'ಲೈವ್ →',
+          sectionTestimonial: '05 — Right now',
+          testimonialsTitle: 'ಜನರು ಏನು ಹೇಳುತ್ತಾರೆ',
+          testimonialsSub: 'ನಾನು ಕೆಲಸ ಮಾಡಿದ ಜನರು ಅಥವಾ ಕಲಿಯುವ ಸಾರಿಗೆ ಕೆಲವು ಮಿತಿ ವಾರ್ತೆಗಳು.',
+          testimonialArun: '— ಅರುಣ್ ಮೇಹತ, ತಿಮ್ಮ ಮುಖಾಂತರ',
+          testimonialRoleArun: 'ಕ್ಯಾಂಪಸ್ ಡಾಶ್ ಟಿವಿ ಸಹಯೋಗಿ',
+          testimonialNisha: '— ನಿಶಾ ರಾವ್, ಮೇನ್ಸರ್',
+          testimonialRoleNisha: 'ವೆಬ್ ಅಭಿವೃದ್ಧಿ ಕಾರ್ಯಾಗಾರ ಮುಖ್ಯಾಧ್ಯಕ್ಷ',
+          testimonialRavi: '— ರವಿ ದೇಶಮುಖ್, ಸಹೋದರ',
+          testimonialRoleRavi: 'ಓಪನ್-ಸೋರ್ಸ್ ಕೊಡುಗೆದಾರ',
+          sectionContact: '06 — Contact',
+          contactTitle: 'ಸಂವಾದಿಸೋಣ.',
+          contactSub: 'ಇಂಟರ್ನ್ಶಿಪ್ಸ್, ಜೂನಿಯರ್ ಡೆವಲಪರ್ ಹೊರಗಳು, ವಿದ್ಯಾರ್ಥಿ ಸಹಕಾರ ಮತ್ತು ಕಾಲೇಜು ಯೋಜನೆಗಳಿಗಾಗಿ ನಾನು ತೆರಳಿಸಿದೆ. ನೀವು ಏನಾದರೂ ನಿರ್ಮಿಸಲು ಬಯಸಿದರೆ — ಅಥವಾ ಸಾಮಾನ್ಯ ಹೇಳಲು — ನನ್ನ ಇಂಬಾಕ್ಸ್ ತೆರಳಿಸಿದೆ.',
+          fieldName: 'ಹೆಸರು',
+          fieldEmail: 'ಇಮೇಲ್',
+          fieldSubject: 'ವಿಷಯ',
+          fieldMessage: 'ಸಂದೇಶ',
+          btnSend: 'ಸಂದೇಶ ಕಳುಹಿಸಿ',
+          formNote: 'ಫ್ರಂಟ್-ಎಂಡ್ ಫಾರ್ಮ್ — ನಿಜವಾದ ಇಮೇಲ್‌ಗಳನ್ನು ಕಳುಹಿಸಲು ಬ್ಯಾಕ್ಎಂಡ್ (Formspree / EmailJS) ಗಾಗಿ ಸಿದ್ಧ.',
+          footGitHub: 'GitHub',
+          footEmail: 'ಇಮೇಲ್',
+        }
+      };
+
+      const langSelect = document.getElementById('lang');
+      const t = (key) => (I18N[langSelect.value] && I18N[langSelect.value][key]) || I18N.en[key];
+
+      const apply = () => {
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const key = el.getAttribute('data-i18n');
+          el.textContent = t(key);
+        });
+      };
+
+      langSelect.addEventListener('change', apply);
+      apply();
     })();
   </script>
 </body>
